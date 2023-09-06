@@ -9,6 +9,7 @@ import Item from "./components/Item";
 import left from "@assets/leftPage.svg";
 import right from "@assets/rightPage.svg";
 import Header from "@components/organisms/Header";
+import { useNavigate } from "react-router-dom";
 const dummyData = [
   {
     id: 1,
@@ -108,6 +109,7 @@ const Lost = () => {
     product: undefined,
     color: undefined,
   });
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
 
   const switchTab = (id) => {
@@ -187,12 +189,13 @@ const Lost = () => {
         <FooterContainer>
           <Space height={"15px"} />
           <Flex align="end">
-            <WriteBtn>
+            <WriteBtn onClick={() => navigate("/lost/add")}>
               <Text
                 cursor="pointer"
                 size={12}
                 weight={700}
                 color={palette.color_beige}
+                onClick={() => navigate("/lost/add")}
               >
                 글쓰기
               </Text>
