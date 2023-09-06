@@ -1,4 +1,5 @@
 const CracoAlias = require("craco-alias");
+const path = require("path");
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
@@ -7,8 +8,15 @@ module.exports = {
     {
       plugin: CracoAlias,
       options: {
-        source: "jsconfig",
-        jsConfigPath: "jsconfig.paths.json",
+        source: "options",
+        baseUrl: "./src/",
+        aliases: {
+          "@utils": "./utils",
+          "@assets": "./assets",
+          "@components": "./components",
+          "@pages": "./pages",
+          "@styles": "./styles",
+        },
       },
     },
   ],

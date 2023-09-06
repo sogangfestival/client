@@ -1,3 +1,4 @@
+import Header from "@components/organisms/Header";
 import React from "react";
 import { styled } from "styled-components";
 
@@ -7,8 +8,10 @@ const AppContainer = ({ children }) => {
 
 const StyledApp = styled.div`
   display: flex;
-  max-width: 380px;
+  flex-direction: column;
+  max-width: 360px;
   margin: 0 auto;
+  width: 100%;
 `;
 
 export default AppContainer;
