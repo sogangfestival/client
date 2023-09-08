@@ -9,6 +9,7 @@ import { Space } from "@components/atoms/Space";
 import up from "@assets/upToggle.svg";
 import down from "@assets/downToggle.svg";
 import { useNavigate } from "react-router-dom";
+import { colorData, mapData, productData } from "@utils/data";
 
 const AddLost = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -21,6 +22,12 @@ const AddLost = () => {
     product: false,
     color: false,
   });
+  const [toggleValue, setToggleValue] = useState({
+    location: undefined,
+    product: undefined,
+    color: undefined,
+  });
+
   const navigate = useNavigate();
 
   const changeToggle = (type) => {
@@ -98,7 +105,7 @@ const AddLost = () => {
                 src={selectedImage}
                 alt="선택한 이미지"
                 width={"87px"}
-                height={"87px"}
+                style={{ objectFit: "cover" }}
               />
             ) : (
               ""
@@ -123,56 +130,180 @@ const AddLost = () => {
           <Space height={"20px"} />
           <FilterSpace>
             <Flex align="start" gap={20}>
-              <Flex direction="row" width="auto" justify="start" gap={9}>
-                <Text
-                  cursor="pointer"
-                  size={12}
-                  weight={500}
-                  color={palette.color_subText}
-                  onClick={() => changeToggle("location")}
-                >
-                  분실위치
-                </Text>
-                <img
-                  style={{ cursor: "pointer" }}
-                  src={toggle.location ? up : down}
-                  alt="toggle"
-                  onClick={() => changeToggle("location")}
-                />
+              <Flex justify="start" align="start">
+                <Flex direction="row" width="auto" justify="start" gap={9}>
+                  <Text
+                    cursor="pointer"
+                    size={12}
+                    weight={500}
+                    color={palette.color_subText}
+                    onClick={() => changeToggle("location")}
+                  >
+                    분실위치
+                  </Text>
+                  <img
+                    style={{ cursor: "pointer" }}
+                    src={toggle.location ? up : down}
+                    alt="toggle"
+                    onClick={() => changeToggle("location")}
+                  />
+                </Flex>
+
+                {toggle.location ? (
+                  <>
+                    <Space height={"11px"} />
+                    <Flex justify="start" direction="row" gap={6} wrap="wrap">
+                      {mapData.map((el, idx) => (
+                        <div
+                          style={{
+                            cursor: "pointer",
+                            backgroundColor:
+                              el === toggleValue.location
+                                ? palette.color_wine
+                                : palette.color_icon,
+                            padding: "3px 5px 4px 5px",
+                            borderRadius: "3px",
+                          }}
+                          onClick={() =>
+                            setToggleValue({ ...toggleValue, location: el })
+                          }
+                          key={idx}
+                        >
+                          <Flex>
+                            <Text
+                              cursor="pointer"
+                              color={palette.color_white}
+                              size={10}
+                              weight={500}
+                            >
+                              #{el}
+                            </Text>
+                          </Flex>
+                        </div>
+                      ))}
+                    </Flex>
+                  </>
+                ) : (
+                  ""
+                )}
               </Flex>
-              <Flex direction="row" width="auto" justify="start" gap={9}>
-                <Text
-                  cursor="pointer"
-                  size={12}
-                  weight={500}
-                  color={palette.color_subText}
-                  onClick={() => changeToggle("product")}
-                >
-                  분실 제품
-                </Text>
-                <img
-                  style={{ cursor: "pointer" }}
-                  src={toggle.product ? up : down}
-                  alt="toggle"
-                  onClick={() => changeToggle("product")}
-                />
+              <Flex align="start">
+                <Flex direction="row" width="auto" justify="start" gap={9}>
+                  <Text
+                    cursor="pointer"
+                    size={12}
+                    weight={500}
+                    color={palette.color_subText}
+                    onClick={() => changeToggle("product")}
+                  >
+                    분실 제품
+                  </Text>
+                  <img
+                    style={{ cursor: "pointer" }}
+                    src={toggle.product ? up : down}
+                    alt="toggle"
+                    onClick={() => changeToggle("product")}
+                  />
+                </Flex>
+                {toggle.product ? (
+                  <>
+                    <Space height={"11px"} />
+                    <Flex justify="start" direction="row" gap={6} wrap="wrap">
+                      {productData.map((el, idx) => (
+                        <div
+                          style={{
+                            cursor: "pointer",
+                            backgroundColor:
+                              el.name === toggleValue.product
+                                ? palette.color_wine
+                                : palette.color_icon,
+                            padding: "3px 5px 4px 5px",
+                            borderRadius: "3px",
+                          }}
+                          onClick={() =>
+                            setToggleValue({
+                              ...toggleValue,
+                              product: el.name,
+                            })
+                          }
+                          key={idx}
+                        >
+                          <Flex>
+                            <Text
+                              cursor="pointer"
+                              color={palette.color_white}
+                              size={10}
+                              weight={500}
+                            >
+                              #{el.name}
+                            </Text>
+                          </Flex>
+                        </div>
+                      ))}
+                    </Flex>
+                  </>
+                ) : (
+                  ""
+                )}
               </Flex>
-              <Flex direction="row" width="auto" justify="start" gap={9}>
-                <Text
-                  cursor="pointer"
-                  size={12}
-                  weight={500}
-                  color={palette.color_subText}
-                  onClick={() => changeToggle("color")}
-                >
-                  색상
-                </Text>
-                <img
-                  style={{ cursor: "pointer" }}
-                  src={toggle.color ? up : down}
-                  alt="toggle"
-                  onClick={() => changeToggle("color")}
-                />
+              <Flex align="start">
+                <Flex direction="row" width="auto" justify="start" gap={9}>
+                  <Text
+                    cursor="pointer"
+                    size={12}
+                    weight={500}
+                    color={palette.color_subText}
+                    onClick={() => changeToggle("color")}
+                  >
+                    색상
+                  </Text>
+                  <img
+                    style={{ cursor: "pointer" }}
+                    src={toggle.color ? up : down}
+                    alt="toggle"
+                    onClick={() => changeToggle("color")}
+                  />
+                </Flex>
+                {toggle.color ? (
+                  <>
+                    <Space height={"11px"} />
+                    <Flex justify="start" direction="row" gap={6} wrap="wrap">
+                      {colorData.map((el, idx) => (
+                        <div
+                          style={{
+                            cursor: "pointer",
+                            backgroundColor:
+                              el.color === toggleValue.color
+                                ? palette.color_wine
+                                : palette.color_icon,
+                            padding: "3px 5px 4px 5px",
+                            borderRadius: "3px",
+                          }}
+                          onClick={() =>
+                            setToggleValue({
+                              ...toggleValue,
+                              color: el.color,
+                            })
+                          }
+                          key={idx}
+                        >
+                          <Flex>
+                            <Text
+                              cursor="pointer"
+                              color={palette.color_white}
+                              size={10}
+                              weight={500}
+                            >
+                              #{el.name}
+                            </Text>
+                          </Flex>
+                        </div>
+                      ))}
+                    </Flex>
+                  </>
+                ) : (
+                  ""
+                )}
               </Flex>
             </Flex>
           </FilterSpace>

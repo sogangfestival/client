@@ -2,47 +2,9 @@ import Flex from "@components/atoms/Flex";
 import { palette } from "@styles/palette";
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import card from "@assets/card.svg";
-import phone from "@assets/phone.svg";
-import cosmetic from "@assets/cosmetic.svg";
-import wallet from "@assets/wallet.svg";
-import etc from "@assets/etc.svg";
-import cloth from "@assets/cloth.svg";
 import { Text } from "@components/atoms/Text";
 import { Space } from "@components/atoms/Space";
-
-const data = [
-  {
-    id: 1,
-    name: "전자기기",
-    src: phone,
-  },
-  {
-    id: 2,
-    name: "지갑",
-    src: wallet,
-  },
-  {
-    id: 3,
-    name: "화장품",
-    src: cosmetic,
-  },
-  {
-    id: 4,
-    name: "의류/액세서리",
-    src: cloth,
-  },
-  {
-    id: 5,
-    name: "카드/신분증",
-    src: card,
-  },
-  {
-    id: 6,
-    name: "기타",
-    src: etc,
-  },
-];
+import { productData } from "@utils/data";
 
 const Product = ({ onClick }) => {
   const [curFilter, setCurFilter] = useState(undefined);
@@ -58,7 +20,7 @@ const Product = ({ onClick }) => {
     <MapContainer>
       <Flex>
         <Flex direction="row" justify="start" gap={6} wrap="wrap">
-          {data.map((el) => (
+          {productData.map((el) => (
             <EachItem
               onClick={toggleFilter}
               click={curFilter}

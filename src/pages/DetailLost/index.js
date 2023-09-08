@@ -40,6 +40,14 @@ const dummy = {
       name: "알로스1",
       postTime: "2023-09-05 15:00",
       content: "제 것 같습니다! 내일까지 찾으러 가겠습니다ㅠㅠ",
+      reReply: [
+        {
+          id: 1,
+          name: "작성자",
+          postTime: "2023-09-05 15:00",
+          content: "그거 참 다행이군요",
+        },
+      ],
     },
   ],
 };
@@ -62,7 +70,7 @@ const DetailLost = () => {
         <Flex gap={99} direction="row" justify="start">
           <Back />
           <Text size={18} weight={700}>
-            습득물 게시판
+            분실물 게시판
           </Text>
         </Flex>
       </DetailTop>
@@ -84,7 +92,7 @@ const DetailLost = () => {
                     size={10}
                     weight={500}
                     lineHeight="100%"
-                    color={palette.white}
+                    color={palette.color_white}
                   >
                     #{el.name}
                   </Text>
