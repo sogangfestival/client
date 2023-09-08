@@ -97,7 +97,7 @@ const ConfirmBtn = styled.div`
   background-color: ${({ isSelected }) =>
     isSelected ? palette.color_wine : palette.color_icon};
   border-radius: 3px;
-  cursor : ${({ isSelected }) => (isSelected ? "pointer" : "none")}
+  cursor: ${({ isSelected }) => (isSelected ? "pointer" : "none")};
   pointer-events: ${({ isSelected }) => (isSelected ? "visible" : "none")};
 `;
 

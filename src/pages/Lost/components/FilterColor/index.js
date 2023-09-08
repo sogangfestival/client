@@ -60,11 +60,11 @@ const colorData = [
   },
   {
     name: "브라운",
-    color: "#000000",
+    color: "#712014",
   },
   {
     name: "베이지",
-    color: "#000000",
+    color: "#E3D6AB",
   },
   {
     name: "패턴",

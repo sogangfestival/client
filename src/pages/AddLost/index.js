@@ -8,15 +8,20 @@ import camera from "@assets/camera.svg";
 import { Space } from "@components/atoms/Space";
 import up from "@assets/upToggle.svg";
 import down from "@assets/downToggle.svg";
+import { useNavigate } from "react-router-dom";
 
 const AddLost = () => {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [search, setSearch] = useState(undefined);
+  const [search, setSearch] = useState({
+    title: undefined,
+    content: undefined,
+  });
   const [toggle, setToggle] = useState({
     location: false,
     product: false,
     color: false,
   });
+  const navigate = useNavigate();
 
   const changeToggle = (type) => {
     setToggle({ ...toggle, [type]: !toggle[type] });
@@ -103,8 +108,8 @@ const AddLost = () => {
           <WriteSpace>
             <TitleInput
               placeholder={"제목을 입력하세요"}
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              value={search.title}
+              onChange={(e) => setSearch({ ...search, title: e.target.value })}
             />
             <Space height={"16px"} />
             <div
@@ -181,13 +186,53 @@ const AddLost = () => {
           ></div>
           <Space height={"20px"} />
           <ContentSpace>
-            <ContentArea placeholder="내용을 입력해주세요" />
+            <ContentArea
+              placeholder="내용을 입력해주세요"
+              value={search.content}
+              onChange={(e) =>
+                setSearch({ ...search, content: e.target.value })
+              }
+            />
           </ContentSpace>
         </Flex>
       </AddBody>
+      <Space height={"10px"} />
+      <ConfirmBtn
+        onClick={
+          search.content && search.title
+            ? () => navigate("/lost")
+            : () => {
+                alert("제목과 본문을 작성해주세요");
+              }
+        }
+        isSelected={search.content && search.title}
+      >
+        <Text
+          cursor={search.content && search.title ? "pointer" : "none"}
+          size={12}
+          color={
+            search.content && search.title
+              ? palette.color_white
+              : palette.color_white
+          }
+        >
+          확인
+        </Text>
+      </ConfirmBtn>
+      <Space height={"10px"} />
     </Flex>
   );
 };
+
+const ConfirmBtn = styled.div`
+  width: 32%;
+  padding: 6px 0px 8px 0px;
+  background-color: ${({ isSelected }) =>
+    isSelected ? palette.color_wine : palette.color_icon};
+  border-radius: 3px;
+  cursor: ${({ isSelected }) => (isSelected ? "pointer" : "none")};
+  pointer-events: ${({ isSelected }) => (isSelected ? "visible" : "none")};
+`;
 
 const ContentSpace = styled.div`
   width: 100%;
