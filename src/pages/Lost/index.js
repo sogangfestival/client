@@ -2,7 +2,7 @@ import Flex from "@components/atoms/Flex";
 import { Text } from "@components/atoms/Text";
 import { styled } from "styled-components";
 import { palette } from "@styles/palette";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Space } from "@components/atoms/Space";
 import SearchImg from "@assets/search.svg";
 import Item from "./components/Item";
@@ -10,6 +10,12 @@ import left from "@assets/leftPage.svg";
 import right from "@assets/rightPage.svg";
 import Header from "@components/organisms/Header";
 import { useNavigate } from "react-router-dom";
+import up from "@assets/upToggle.svg";
+import down from "@assets/downToggle.svg";
+import Map from "./components/Map";
+import Product from "./components/Product";
+import FilterColor from "./components/FilterColor";
+
 const dummyData = [
   {
     id: 1,
@@ -102,20 +108,54 @@ const dummyData = [
 ];
 
 const Lost = () => {
+  // 상단 탭 스위칭 용 state
   const [isClicked, setIsClicked] = useState("lost");
+  // 검색어
   const [search, setSearch] = useState(undefined);
-  const [filter, setFilter] = useState({
+  // 필터 토글 유무
+  const [toggle, setToggle] = useState({
+    location: false,
+    product: false,
+    color: false,
+  });
+  // 필터 자체 값에 대한 state
+  const [toggleValue, setToggleValue] = useState({
     location: undefined,
     product: undefined,
     color: undefined,
   });
-  const navigate = useNavigate();
-  const [data, setData] = useState([]);
 
+  console.log(toggleValue.color);
+
+  const changeToggleValue = (type, value) => {
+    setToggleValue({ ...toggleValue, [type]: value });
+  };
+
+  // 받아온 분실물 데이터
+  const [data, setData] = useState(dummyData);
+
+  const navigate = useNavigate();
+  const changeToggle = (type) => {
+    const newData = {
+      location: false,
+      product: false,
+      color: false,
+    };
+    setToggle({ ...newData, [type]: !toggle[type] });
+  };
   const switchTab = (id) => {
     setIsClicked(id);
     setSearch("");
   };
+
+  useEffect(() => {
+    const newData = {
+      location: false,
+      product: false,
+      color: false,
+    };
+    setToggle(newData);
+  }, [toggleValue]);
 
   return (
     <Flex>
@@ -178,10 +218,130 @@ const Lost = () => {
             </Flex>
           </InputWrapper>
         </InputContainer>
-        <FilterContainer></FilterContainer>
+        <Space height={"20px"} />
+        <FilterSpace>
+          <Flex direction="row" justify="start" gap={18} height="21px">
+            {toggleValue.location ? (
+              <SelectedFilter
+                onClick={() => changeToggleValue("product", undefined)}
+              >
+                <Flex direction="row" justify="start" gap={7}>
+                  <Text cursor="pointer" color={palette.color_white}>
+                    {toggleValue.product}
+                  </Text>
+                  <Text cursor="pointer" color={palette.color_white}>
+                    X
+                  </Text>
+                </Flex>
+              </SelectedFilter>
+            ) : (
+              <Flex direction="row" width="auto" justify="start" gap={5}>
+                <Text
+                  cursor="pointer"
+                  size={10}
+                  weight={500}
+                  color={
+                    toggle.location
+                      ? palette.color_wine
+                      : palette.color_mainText
+                  }
+                  onClick={() => changeToggle("location")}
+                >
+                  분실위치
+                </Text>
+                <img
+                  style={{ cursor: "pointer" }}
+                  src={toggle.location ? up : down}
+                  alt="toggle"
+                  onClick={() => changeToggle("location")}
+                />
+              </Flex>
+            )}
+
+            {toggleValue.product ? (
+              <SelectedFilter
+                onClick={() => changeToggleValue("product", undefined)}
+              >
+                <Flex direction="row" justify="start" gap={7}>
+                  <Text cursor="pointer" color={palette.color_white}>
+                    {toggleValue.product}
+                  </Text>
+                  <Text cursor="pointer" color={palette.color_white}>
+                    X
+                  </Text>
+                </Flex>
+              </SelectedFilter>
+            ) : (
+              <Flex direction="row" width="auto" justify="start" gap={5}>
+                <Text
+                  cursor="pointer"
+                  size={10}
+                  weight={500}
+                  color={
+                    toggle.product ? palette.color_wine : palette.color_mainText
+                  }
+                  onClick={() => changeToggle("product")}
+                >
+                  분실 제품
+                </Text>
+                <img
+                  style={{ cursor: "pointer" }}
+                  src={toggle.product ? up : down}
+                  alt="toggle"
+                  onClick={() => changeToggle("product")}
+                />
+              </Flex>
+            )}
+            {toggleValue.color ? (
+              <SelectedFilter
+                onClick={() => changeToggleValue("color", undefined)}
+              >
+                <Flex direction="row" justify="start" gap={7}>
+                  <Text cursor="pointer" color={palette.color_white}>
+                    {toggleValue.color}
+                  </Text>
+                  <Text cursor="pointer" color={palette.color_white}>
+                    X
+                  </Text>
+                </Flex>
+              </SelectedFilter>
+            ) : (
+              <Flex direction="row" width="auto" justify="start" gap={5}>
+                <Text
+                  cursor="pointer"
+                  size={10}
+                  weight={500}
+                  color={
+                    toggle.color ? palette.color_wine : palette.color_mainText
+                  }
+                  onClick={() => changeToggle("color")}
+                >
+                  색상
+                </Text>
+                <img
+                  style={{ cursor: "pointer" }}
+                  src={toggle.color ? up : down}
+                  alt="toggle"
+                  onClick={() => changeToggle("color")}
+                />
+              </Flex>
+            )}
+          </Flex>
+          <Space height={"10px"} />
+        </FilterSpace>
+        <div
+          style={{
+            width: "100%",
+            height: "1px",
+            backgroundColor: palette.color_icon,
+          }}
+        ></div>
         <ItemContainer>
+          {toggle.location ? <Map onClick={changeToggleValue} /> : ""}
+          {toggle.product ? <Product onClick={changeToggleValue} /> : ""}
+          {toggle.color ? <FilterColor onClick={changeToggleValue} /> : ""}
           <Flex>
-            {dummyData.map((el) => (
+            {data.map((el) => (
               <Item key={el.id} {...el} />
             ))}
           </Flex>
@@ -219,6 +379,19 @@ const Lost = () => {
   );
 };
 
+const SelectedFilter = styled.div`
+  cursor: pointer;
+  background-color: ${palette.color_wine};
+  border-radius: 3px;
+  padding: 4px 7px 5px 7px;
+`;
+
+const FilterSpace = styled.div`
+  width: 100%;
+  padding: 0px 18px;
+  height: 30px;
+`;
+
 const PaginationBtn = styled.img`
   width: 4px;
   height: 8px;
@@ -239,6 +412,7 @@ const FooterContainer = styled.div`
 
 const ItemContainer = styled.div`
   height: 400px;
+  position: relative;
 `;
 
 const FilterContainer = styled.div`

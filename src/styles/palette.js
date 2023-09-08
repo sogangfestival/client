@@ -5,5 +5,5 @@ export const palette = {
   color_beige: "#F0EBD7",
   color_mainText: "#303030",
   color_icon: "#C1C1C1",
-  white: "white",
+  color_white: "white",
 };

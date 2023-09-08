@@ -8,7 +8,7 @@ const Flex = ({
   align = "center",
   gap = 0,
   width = "100%",
-  wrap = "no-wrap",
+  wrap = "nowrap",
 }) => {
   return (
     <FlexBase
