@@ -15,6 +15,7 @@ import down from "@assets/downToggle.svg";
 import Map from "./components/Map";
 import Product from "./components/Product";
 import FilterColor from "./components/FilterColor";
+import Spinner from "@components/organisms/Spinner";
 
 const dummyData = [
   {
@@ -161,6 +162,7 @@ const Lost = () => {
     <Flex>
       <Header />
       <Flex>
+        <Spinner />
         <TopSwitchWrapper>
           <Flex direction="row">
             <Flex direction="row">
