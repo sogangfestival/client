@@ -160,9 +160,10 @@ const Lost = () => {
 
   return (
     <Flex>
+      {/* 데이터가 들어오지 않을 때  */}
+      {data ? "" : <Spinner />}
       <Header />
       <Flex>
-        <Spinner />
         <TopSwitchWrapper>
           <Flex direction="row">
             <Flex direction="row">
