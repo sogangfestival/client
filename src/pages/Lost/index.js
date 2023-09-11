@@ -126,14 +126,23 @@ const Lost = () => {
     color: undefined,
   });
 
-  console.log(toggleValue.color);
+  const isSuperVisor = () => {
+    const userInput = prompt(
+      "해당 기능은 총학에서만 관리합니다. 비밀번호를 입력해주세요:"
+    );
+    if (userInput === process.env.REACT_APP_FOUND_PW) {
+      navigate("/lost/add?isMaster=true");
+    } else {
+      alert("비밀번호가 틀렸습니다.");
+    }
+  };
 
   const changeToggleValue = (type, value) => {
     setToggleValue({ ...toggleValue, [type]: value });
   };
 
   // 받아온 분실물 데이터
-  const [data, setData] = useState(dummyData);
+  const [lostData, setData] = useState(dummyData);
 
   const navigate = useNavigate();
   const changeToggle = (type) => {
@@ -158,10 +167,24 @@ const Lost = () => {
     setToggle(newData);
   }, [toggleValue]);
 
+  useEffect(() => {
+    setToggleValue({
+      location: undefined,
+      product: undefined,
+      color: undefined,
+    });
+    setSearch(undefined);
+    setToggle({
+      location: false,
+      product: false,
+      color: false,
+    });
+  }, [isClicked]);
+
   return (
     <Flex>
       {/* 데이터가 들어오지 않을 때  */}
-      {data ? "" : <Spinner />}
+      {lostData ? "" : <Spinner />}
       <Header />
       <Flex>
         <TopSwitchWrapper>
@@ -217,7 +240,7 @@ const Lost = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <img src={SearchImg} alt="search" />
+              <img src={SearchImg} alt="search" style={{ cursor: "pointer" }} />
             </Flex>
           </InputWrapper>
         </InputContainer>
@@ -230,7 +253,7 @@ const Lost = () => {
               >
                 <Flex direction="row" justify="start" gap={7}>
                   <Text cursor="pointer" color={palette.color_white}>
-                    {toggleValue.product}
+                    {toggleValue.location}
                   </Text>
                   <Text cursor="pointer" color={palette.color_white}>
                     X
@@ -340,11 +363,15 @@ const Lost = () => {
           }}
         ></div>
         <ItemContainer>
-          {toggle.location ? <Map onClick={changeToggleValue} /> : ""}
+          {toggle.location ? (
+            <Map click={toggleValue.location} onClick={changeToggleValue} />
+          ) : (
+            ""
+          )}
           {toggle.product ? <Product onClick={changeToggleValue} /> : ""}
           {toggle.color ? <FilterColor onClick={changeToggleValue} /> : ""}
           <Flex>
-            {data.map((el) => (
+            {lostData.map((el) => (
               <Item key={el.id} {...el} />
             ))}
           </Flex>
@@ -352,13 +379,23 @@ const Lost = () => {
         <FooterContainer>
           <Space height={"15px"} />
           <Flex align="end">
-            <WriteBtn onClick={() => navigate("/lost/add")}>
+            <WriteBtn
+              onClick={
+                isClicked === "lost"
+                  ? () => navigate("/lost/add")
+                  : () => isSuperVisor()
+              }
+            >
               <Text
                 cursor="pointer"
                 size={12}
                 weight={700}
                 color={palette.color_beige}
-                onClick={() => navigate("/lost/add")}
+                onClick={
+                  isClicked === "lost"
+                    ? () => navigate("/lost/add")
+                    : () => isSuperVisor()
+                }
               >
                 글쓰기
               </Text>

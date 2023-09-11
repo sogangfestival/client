@@ -54,7 +54,6 @@ const spin = keyframes`
   100% {
     transform: rotate(360deg); /* 360도 회전 */
   }
-
 `;
 
 const SpinnerContainer = styled.div`

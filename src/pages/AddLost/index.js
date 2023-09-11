@@ -158,14 +158,17 @@ const AddLost = () => {
                           style={{
                             cursor: "pointer",
                             backgroundColor:
-                              el === toggleValue.location
+                              el.name === toggleValue.location
                                 ? palette.color_wine
                                 : palette.color_icon,
                             padding: "3px 5px 4px 5px",
                             borderRadius: "3px",
                           }}
                           onClick={() =>
-                            setToggleValue({ ...toggleValue, location: el })
+                            setToggleValue({
+                              ...toggleValue,
+                              location: el.name,
+                            })
                           }
                           key={idx}
                         >
@@ -176,7 +179,7 @@ const AddLost = () => {
                               size={10}
                               weight={500}
                             >
-                              #{el}
+                              #{el.name}
                             </Text>
                           </Flex>
                         </div>

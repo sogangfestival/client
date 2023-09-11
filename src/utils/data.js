@@ -7,22 +7,120 @@ import cloth from "@assets/cloth.svg";
 import pattern from "@assets/pattern.svg";
 
 export const mapData = [
-  "J관",
-  "R관",
-  "K관",
-  "GA관",
-  "MA관",
-  "AS관",
-  "다산관",
-  "체육관",
-  "경제관",
-  "우정원",
-  "청년광장",
-  "대운동장",
-  "엠마오관",
-  "로욜라 도서관",
-  "곤자가 플라자",
-  "잘 모르겠음",
+  {
+    name: "J관",
+    coord: {
+      x: 272,
+      y: 49,
+    },
+  },
+  {
+    name: "R관",
+    coord: {
+      x: 246,
+      y: 98,
+    },
+  },
+  {
+    name: "K관",
+    coord: {
+      x: 205,
+      y: 125,
+    },
+  },
+
+  {
+    name: "GA관",
+    coord: {
+      x: 80,
+      y: 80,
+    },
+  },
+  {
+    name: "MA관",
+    coord: {
+      x: 60,
+      y: 55,
+    },
+  },
+  {
+    name: "AS관",
+    coord: {
+      x: 252,
+      y: 76,
+    },
+  },
+  {
+    name: "다산관",
+    coord: {
+      x: 195,
+      y: 18,
+    },
+  },
+  {
+    name: "체육관",
+    coord: {
+      x: 180,
+      y: 150,
+    },
+  },
+
+  {
+    name: "우정원",
+    coord: {
+      x: 139,
+      y: 135,
+    },
+  },
+  {
+    name: "청년광장",
+    coord: {
+      x: 110,
+      y: 100,
+    },
+  },
+  {
+    name: "대운동장",
+    coord: {
+      x: 210,
+      y: 80,
+    },
+  },
+  {
+    name: "엠마오관",
+    coord: {
+      x: 175,
+      y: 73,
+    },
+  },
+  {
+    name: "로욜라 도서관",
+    coord: {
+      x: 183,
+      y: 46,
+    },
+  },
+  {
+    name: "곤자가 플라자",
+    coord: {
+      x: 233,
+      y: 50,
+    },
+  },
+  {
+    name: "잘 모르겠음",
+    coord: {
+      x: 0,
+      y: 0,
+    },
+  },
+  {
+    name: "경제관",
+    coord: {
+      x: 175,
+      y: 115,
+    },
+  },
 ];
 
 export const productData = [
