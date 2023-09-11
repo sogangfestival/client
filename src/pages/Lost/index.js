@@ -249,7 +249,7 @@ const Lost = () => {
           <Flex direction="row" justify="start" gap={18} height="21px">
             {toggleValue.location ? (
               <SelectedFilter
-                onClick={() => changeToggleValue("product", undefined)}
+                onClick={() => changeToggleValue("location", undefined)}
               >
                 <Flex direction="row" justify="start" gap={7}>
                   <Text cursor="pointer" color={palette.color_white}>
