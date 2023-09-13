@@ -11,7 +11,8 @@ const FilterColor = ({ onClick }) => {
   const [curFilter, setCurFilter] = useState(undefined);
 
   const changeColor = (val) => {
-    if (val === curFilter) {
+    console.log(val);
+    if (val?.split(" ")[0] === curFilter?.split(" ")[0]) {
       setCurFilter(undefined);
     } else {
       setCurFilter(val);
@@ -23,7 +24,7 @@ const FilterColor = ({ onClick }) => {
         <Flex direction="row" gap={40} justify="start" wrap="wrap">
           {colorData.map((el, idx) => (
             <EachColor
-              click={curFilter}
+              click={curFilter?.split(" ")[0]}
               onClick={changeColor}
               {...el}
               key={idx}
@@ -31,9 +32,9 @@ const FilterColor = ({ onClick }) => {
           ))}
         </Flex>
         <ConfirmBtn
-          isSelected={curFilter}
+          isSelected={curFilter?.split(" ")[0]}
           onClick={
-            curFilter
+            curFilter?.split(" ")[0]
               ? () => onClick("color", curFilter)
               : () => {
                   return;
@@ -41,9 +42,13 @@ const FilterColor = ({ onClick }) => {
           }
         >
           <Text
-            cursor={curFilter ? "pointer" : "none"}
+            cursor={curFilter?.split(" ")[0] ? "pointer" : "none"}
             size={12}
-            color={curFilter ? palette.color_white : palette.color_white}
+            color={
+              curFilter?.split(" ")[0]
+                ? palette.color_white
+                : palette.color_white
+            }
           >
             확인
           </Text>
@@ -63,10 +68,10 @@ const ConfirmBtn = styled.div`
   pointer-events: ${({ isSelected }) => (isSelected ? "visible" : "none")};
 `;
 
-const EachColor = ({ click, name, src = "", color = "", onClick }) => {
+const EachColor = ({ click, name, src = "", color = "", onClick, id }) => {
   const isClicked = click === name;
   return (
-    <EachColorWrapper onClick={() => onClick(name)}>
+    <EachColorWrapper onClick={() => onClick(`${name} ${id}`)}>
       <Flex gap={5} width="auto">
         {src ? (
           <img

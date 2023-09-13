@@ -8,8 +8,9 @@ import camera from "@assets/camera.svg";
 import { Space } from "@components/atoms/Space";
 import up from "@assets/upToggle.svg";
 import down from "@assets/downToggle.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { colorData, mapData, productData } from "@utils/data";
+import Service from "services/sgFestival";
 
 const AddLost = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -17,18 +18,39 @@ const AddLost = () => {
     title: undefined,
     content: undefined,
   });
+  const [file, setFile] = useState("");
   const [toggle, setToggle] = useState({
     location: false,
     product: false,
     color: false,
   });
+  const { flag } = useParams();
   const [toggleValue, setToggleValue] = useState({
-    location: undefined,
-    product: undefined,
-    color: undefined,
+    location: "",
+    product: "",
+    color: "",
   });
+  const [pwd, setPwd] = useState(1);
 
   const navigate = useNavigate();
+
+  const postPost = () => {
+    try {
+      const data = Service.uploadPost({
+        title: search.title,
+        content: search.content,
+        place: [toggleValue.location],
+        type: [toggleValue.product],
+        color: [toggleValue.color],
+        password: pwd,
+        image1: file,
+        flag: flag === "no" ? false : true,
+      });
+      console.log(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const changeToggle = (type) => {
     setToggle({ ...toggle, [type]: !toggle[type] });
@@ -37,6 +59,10 @@ const AddLost = () => {
   const handleImageSelect = (e) => {
     const file = e.target.files[0];
     if (file) {
+      const formData = new FormData();
+      formData.append("files", file);
+
+      setFile(formData);
       const reader = new FileReader();
       reader.onload = () => {
         setSelectedImage(reader.result);
@@ -54,10 +80,21 @@ const AddLost = () => {
             글쓰기
           </Text>
           <Text
-            cursor="pointer"
+            onClick={
+              search.content && search.title
+                ? () => postPost()
+                : () => {
+                    alert("제목과 본문을 작성해주세요");
+                  }
+            }
+            cursor={search.content && search.title ? "pointer" : "none"}
             size={16}
             weight={500}
-            color={palette.color_subText}
+            color={
+              search.content && search.title
+                ? palette.color_wine
+                : palette.color_subText
+            }
           >
             완료
           </Text>
@@ -330,29 +367,6 @@ const AddLost = () => {
           </ContentSpace>
         </Flex>
       </AddBody>
-      <Space height={"10px"} />
-      <ConfirmBtn
-        onClick={
-          search.content && search.title
-            ? () => navigate("/lost")
-            : () => {
-                alert("제목과 본문을 작성해주세요");
-              }
-        }
-        isSelected={search.content && search.title}
-      >
-        <Text
-          cursor={search.content && search.title ? "pointer" : "none"}
-          size={12}
-          color={
-            search.content && search.title
-              ? palette.color_white
-              : palette.color_white
-          }
-        >
-          확인
-        </Text>
-      </ConfirmBtn>
       <Space height={"10px"} />
     </Flex>
   );

@@ -1,16 +1,13 @@
 export const calculateTime = (time) => {
-  const curTime = new Date().getTime();
-  const postedTime = new Date(time).getTime();
-  const timeDiff = Number((curTime - postedTime) / 1000 / 60);
+  const data = time.split(" ");
 
-  if (timeDiff < 1) {
-    return "방금";
-  } else if (timeDiff >= 1 && timeDiff <= 59) {
-    return `${Math.floor(timeDiff)}분 전`;
-  } else if (timeDiff >= 60 && timeDiff <= 1439) {
-    return `${Math.floor(timeDiff / 60)}시간 전`;
+  if (data.length === 7) {
+    return `${data[0]}일 전`;
+  } else if (data.length === 5) {
+    return `${data[0]}시간 전`;
+  } else if (data.length === 3) {
+    return `${data[0]}분 전`;
   } else {
-    const hi = new Date(time).toLocaleDateString().split(".");
-    return `${hi[1].trim().padStart(2, 0)}/${hi[2].trim().padStart(2, 0)}`;
+    return `방금`;
   }
 };

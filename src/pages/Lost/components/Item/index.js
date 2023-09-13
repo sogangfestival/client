@@ -9,28 +9,45 @@ import Tag from "../Tag";
 import { Link } from "react-router-dom";
 import { calculateTime } from "@utils/lib.js";
 
-const Item = ({ id, src, title, desc, tags, replyCount, postTime }) => {
+const Item = ({
+  id,
+  place = [],
+  type = [],
+  color = [],
+  replyCount = 0,
+  created_at,
+  title,
+  image1,
+  content,
+  flag,
+}) => {
   const goDetail = () => {};
   return (
     <StyledItem>
       <Flex direction="row" justify="start" gap={4}>
         <Link style={{ textDecoration: "none" }} to={`/lost/${id}`}>
-          <ItemImg src={src ? src : iphone} width={72} height={72} />
+          <ItemImg src={image1 ? image1 : iphone} width={72} height={72} />
         </Link>
-        <Flex gap={7} justify="start">
+        <Flex gap={7} align="start" justify="start">
           <Flex gap={8}>
             <Flex direction="row" justify="start" gap={16}>
               <Flex gap={12} direction="row" width="auto" justify="start">
                 <TitleBox>
                   <Link style={{ textDecoration: "none" }} to={`/lost/${id}`}>
-                    <Text cursor="pointer" size={12} weight={700} isCut={true}>
+                    <Text
+                      align="start"
+                      cursor="pointer"
+                      size={12}
+                      weight={700}
+                      isCut={true}
+                    >
                       {title}
                     </Text>
                   </Link>
                 </TitleBox>
                 <TimeBox>
                   <Flex>
-                    <Text>{calculateTime(postTime)}</Text>
+                    <Text>{calculateTime(created_at)}</Text>
                   </Flex>
                 </TimeBox>
               </Flex>
@@ -42,17 +59,22 @@ const Item = ({ id, src, title, desc, tags, replyCount, postTime }) => {
               </Flex>
             </Flex>
             <Flex direction="row" justify="start" gap={12}>
-              {tags.map((el, idx) => (
-                <Tag key={idx}>
-                  <Text
-                    weight={500}
-                    lineHeight="100%"
-                    color={palette.color_wine}
-                  >
-                    #{el.name}
-                  </Text>
-                </Tag>
-              ))}
+              <Tag>
+                <Text weight={500} lineHeight="100%" color={palette.color_wine}>
+                  #{place[0]}
+                </Text>
+              </Tag>
+              <Tag>
+                <Text weight={500} lineHeight="100%" color={palette.color_wine}>
+                  #{type[0]}
+                </Text>
+              </Tag>
+
+              <Tag>
+                <Text weight={500} lineHeight="100%" color={palette.color_wine}>
+                  #{color[0]}
+                </Text>
+              </Tag>
             </Flex>
           </Flex>
           <Text
@@ -63,7 +85,7 @@ const Item = ({ id, src, title, desc, tags, replyCount, postTime }) => {
             size={10}
             color={palette.color_mainText}
           >
-            {desc}
+            {content}
           </Text>
         </Flex>
       </Flex>
@@ -80,6 +102,7 @@ const TitleBox = styled.div`
 `;
 
 const ItemImg = styled.img`
+  object-fit: contain;
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
   cursor: pointer;

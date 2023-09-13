@@ -16,97 +16,7 @@ import Map from "./components/Map";
 import Product from "./components/Product";
 import FilterColor from "./components/FilterColor";
 import Spinner from "@components/organisms/Spinner";
-
-const dummyData = [
-  {
-    id: 1,
-    src: undefined,
-    title: "제목이 길어지면 여기까지만 보여주세요 제발!!",
-    desc: "내용 첫 번째 줄 입니다. 텍스트 박스 길이는 여기까지____본문이 길어진다면 점점점으로 잘라주세요 제가 LA에 있어서 작업이 힘든데 너무 고생하십니다...",
-    tags: [
-      {
-        type: "location",
-        name: "우정원",
-      },
-      {
-        type: "product",
-        name: "전자기기",
-      },
-      {
-        type: "color",
-        name: "블랙",
-      },
-    ],
-    replyCount: 5,
-    postTime: "2023-09-05 15:00",
-  },
-  {
-    id: 2,
-    src: undefined,
-    title: "제목이 길어지면 여기까지만 보여주세요 제발!!",
-    desc: "내용 첫 번째 줄 입니다. 텍스트 박스 길이는 여기까지____본문이 길어진다면 점점점으로 잘라주세요 제가 LA에 있어서 작업이 힘든데 너무 고생하십니다...",
-    tags: [
-      {
-        type: "location",
-        name: "우정원",
-      },
-      {
-        type: "product",
-        name: "전자기기",
-      },
-      {
-        type: "color",
-        name: "블랙",
-      },
-    ],
-    replyCount: 5,
-    postTime: "2023-09-06 02:00",
-  },
-  {
-    id: 3,
-    src: undefined,
-    title: "제목이 길어지면 여기까지만 보여주세요 제발!!",
-    desc: "내용 첫 번째 줄 입니다. 텍스트 박스 길이는 여기까지____본문이 길어진다면 점점점으로 잘라주세요 제가 LA에 있어서 작업이 힘든데 너무 고생하십니다...",
-    tags: [
-      {
-        type: "location",
-        name: "우정원",
-      },
-      {
-        type: "product",
-        name: "전자기기",
-      },
-      {
-        type: "color",
-        name: "블랙",
-      },
-    ],
-    replyCount: 5,
-    postTime: "2023-09-06 02:00",
-  },
-  {
-    id: 4,
-    src: undefined,
-    title: "제목이 길어지면 여기까지만 보여주세요 제발!!",
-    desc: "내용 첫 번째 줄 입니다. 텍스트 박스 길이는 여기까지____본문이 길어진다면 점점점으로 잘라주세요 제가 LA에 있어서 작업이 힘든데 너무 고생하십니다...",
-    tags: [
-      {
-        type: "location",
-        name: "우정원",
-      },
-      {
-        type: "product",
-        name: "전자기기",
-      },
-      {
-        type: "color",
-        name: "블랙",
-      },
-    ],
-    replyCount: 5,
-    postTime: "2023-09-06 02:00",
-  },
-];
+import Service from "services/sgFestival";
 
 const Lost = () => {
   // 상단 탭 스위칭 용 state
@@ -121,9 +31,9 @@ const Lost = () => {
   });
   // 필터 자체 값에 대한 state
   const [toggleValue, setToggleValue] = useState({
-    location: undefined,
-    product: undefined,
-    color: undefined,
+    location: "",
+    product: "",
+    color: "",
   });
 
   const isSuperVisor = () => {
@@ -131,7 +41,7 @@ const Lost = () => {
       "해당 기능은 총학에서만 관리합니다. 비밀번호를 입력해주세요:"
     );
     if (userInput === process.env.REACT_APP_FOUND_PW) {
-      navigate("/lost/add?isMaster=true");
+      navigate("/lost/add?flag=no");
     } else {
       alert("비밀번호가 틀렸습니다.");
     }
@@ -142,7 +52,60 @@ const Lost = () => {
   };
 
   // 받아온 분실물 데이터
-  const [lostData, setData] = useState(dummyData);
+  const [lostData, setData] = useState([]);
+  const [page, setPage] = useState(1);
+
+  const changePage = (direction) => {
+    if (direction === "left") {
+      if (!lostData.previous) {
+        alert("첫번째 페이지입니다");
+      } else {
+        setPage(page - 1);
+      }
+    } else if (direction === "right") {
+      if (!lostData.next) {
+        alert("마지막 페이지입니다");
+      } else {
+        setPage(page + 1);
+      }
+    }
+  };
+
+  const getLostData = async (isPage = false) => {
+    let data;
+    let place = toggleValue?.location?.split(" ")[1];
+    let color = toggleValue?.color?.split(" ")[1];
+    let type = toggleValue.product?.split(" ")[1];
+    let keyword = search;
+    let realPage = isPage ? 1 : page;
+
+    try {
+      if (isClicked === "lost") {
+        data = await Service.getLostPost({
+          page: realPage,
+          color,
+          type,
+          keyword,
+          place,
+        });
+      } else if (isClicked === "acquis") {
+        data = await Service.getFoundPost({
+          page: realPage,
+          color,
+          type,
+          keyword,
+          place,
+        });
+      }
+      setData(data.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    getLostData();
+  }, [isClicked, page]);
 
   const navigate = useNavigate();
   const changeToggle = (type) => {
@@ -217,13 +180,13 @@ const Lost = () => {
             </div>
             <Flex direction="row">
               <StlyedBoard
-                onClick={() => switchTab("found")}
-                isClicked={isClicked === "found"}
+                onClick={() => switchTab("acquis")}
+                isClicked={isClicked === "acquis"}
               >
                 <Text
                   size={12}
                   cursor="pointer"
-                  color={isClicked === "found" ? palette.color_wine : "black"}
+                  color={isClicked === "acquis" ? palette.color_wine : "black"}
                 >
                   습득물 게시판
                 </Text>
@@ -240,7 +203,15 @@ const Lost = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <img src={SearchImg} alt="search" style={{ cursor: "pointer" }} />
+              <img
+                src={SearchImg}
+                alt="search"
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  getLostData(true);
+                  setPage(1);
+                }}
+              />
             </Flex>
           </InputWrapper>
         </InputContainer>
@@ -253,7 +224,7 @@ const Lost = () => {
               >
                 <Flex direction="row" justify="start" gap={7}>
                   <Text cursor="pointer" color={palette.color_white}>
-                    {toggleValue.location}
+                    {toggleValue?.location?.split(" ")[0]}
                   </Text>
                   <Text cursor="pointer" color={palette.color_white}>
                     X
@@ -284,13 +255,13 @@ const Lost = () => {
               </Flex>
             )}
 
-            {toggleValue.product ? (
+            {toggleValue.product?.split(" ")[0] ? (
               <SelectedFilter
                 onClick={() => changeToggleValue("product", undefined)}
               >
                 <Flex direction="row" justify="start" gap={7}>
                   <Text cursor="pointer" color={palette.color_white}>
-                    {toggleValue.product}
+                    {toggleValue.product?.split(" ")[0]}
                   </Text>
                   <Text cursor="pointer" color={palette.color_white}>
                     X
@@ -318,13 +289,13 @@ const Lost = () => {
                 />
               </Flex>
             )}
-            {toggleValue.color ? (
+            {toggleValue?.color?.split(" ")[0] ? (
               <SelectedFilter
                 onClick={() => changeToggleValue("color", undefined)}
               >
                 <Flex direction="row" justify="start" gap={7}>
                   <Text cursor="pointer" color={palette.color_white}>
-                    {toggleValue.color}
+                    {toggleValue?.color?.split(" ")[0]}
                   </Text>
                   <Text cursor="pointer" color={palette.color_white}>
                     X
@@ -371,7 +342,7 @@ const Lost = () => {
           {toggle.product ? <Product onClick={changeToggleValue} /> : ""}
           {toggle.color ? <FilterColor onClick={changeToggleValue} /> : ""}
           <Flex>
-            {lostData.map((el) => (
+            {lostData?.results?.map((el) => (
               <Item key={el.id} {...el} />
             ))}
           </Flex>
@@ -403,15 +374,25 @@ const Lost = () => {
           </Flex>
           <Space height={"5px"} />
           <Flex direction="row" width="auto" gap={20}>
-            <PaginationBtn src={left} alt="leftPage" />
+            <PaginationBtn
+              src={left}
+              alt="leftPage"
+              onClick={() => changePage("left")}
+            />
             <Flex width="auto" direction="row">
               <Text cursor="pointer" size={12} color={palette.color_wine}>
-                1&nbsp;
+                {page}&nbsp;
               </Text>
               <Text size={12}>/&nbsp;</Text>
-              <Text size={12}>5</Text>
+              <Text size={12}>
+                {lostData.count ? Math.ceil(lostData.count / 4) : 1}
+              </Text>
             </Flex>
-            <PaginationBtn src={right} alt="rightPage" />
+            <PaginationBtn
+              src={right}
+              alt="rightPage"
+              onClick={() => changePage("right")}
+            />
           </Flex>
         </FooterContainer>
       </Flex>
@@ -452,6 +433,7 @@ const FooterContainer = styled.div`
 
 const ItemContainer = styled.div`
   height: 400px;
+  width: 100%;
   position: relative;
 `;
 

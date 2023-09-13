@@ -10,6 +10,7 @@ const StyledApp = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 360px;
+  min-width: 360px;
   margin: 0 auto;
   width: 100%;
   overflow-y: scroll;

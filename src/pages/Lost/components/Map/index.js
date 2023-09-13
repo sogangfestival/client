@@ -18,7 +18,7 @@ const Map = ({ click, onClick }) => {
           <MapImg src={map} alt="map" />
           {mapData.map((el) => (
             <IndicatorContainer
-              isClicked={mapName === el.name}
+              isClicked={mapName?.split(" ")[0] === el.name}
               x={el.coord.x}
               y={el.coord.y}
               key={el.name}
@@ -34,18 +34,22 @@ const Map = ({ click, onClick }) => {
         </MapWrapper>
         <Space height={"25px"} />
         <Flex direction="row" justify="start" gap={6} wrap="wrap">
-          {[...mapData].splice(0, mapData.length - 1).map((el, idx) => (
+          {mapData.map((el, id, idx) => (
             <MapItem
-              isClicked={mapName === el.name}
-              key={idx}
+              isClicked={mapName?.split(" ")[0] === el.name}
+              key={id}
               onClick={
-                el.name === mapName
+                el.name === mapName?.split(" ")[0]
                   ? () => setMapName(undefined)
-                  : () => setMapName(el.name)
+                  : () => setMapName(`${el.name} ${el.id}`)
               }
             >
               <Text
-                color={mapName === el.name ? "white" : palette.color_mainText}
+                color={
+                  mapName?.split(" ")[0] === el.name
+                    ? "white"
+                    : palette.color_mainText
+                }
                 cursor="pointer"
               >
                 {el.name}
@@ -55,11 +59,15 @@ const Map = ({ click, onClick }) => {
         </Flex>
         <Space height={"21px"} />
         <MapItem
-          onClick={mapName ? () => onClick("location", mapName) : () => {}}
-          isClicked={mapName}
+          onClick={
+            mapName?.split(" ")[0]
+              ? () => onClick("location", mapName)
+              : () => {}
+          }
+          isClicked={mapName?.split(" ")[0]}
         >
           <Text
-            color={mapName ? "white" : palette.color_mainText}
+            color={mapName?.split(" ")[0] ? "white" : palette.color_mainText}
             cursor="pointer"
           >
             확인
@@ -105,7 +113,7 @@ const IndicatorContainer = styled.div`
 const MapItem = styled.div`
   background-color: ${({ isClicked }) =>
     isClicked ? palette.color_wine : palette.color_line};
-  width: 103px;
+  width: 100px;
   height: 28px;
   border-radius: 3px;
   cursor: pointer;

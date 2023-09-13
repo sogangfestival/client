@@ -23,7 +23,7 @@ const Product = ({ onClick }) => {
           {productData.map((el) => (
             <EachItem
               onClick={toggleFilter}
-              click={curFilter}
+              click={curFilter?.split(" ")[0]}
               {...el}
               key={el.id}
             />
@@ -31,9 +31,9 @@ const Product = ({ onClick }) => {
         </Flex>
         <Space height={"29px"} />
         <ConfirmBtn
-          isSelected={curFilter}
+          isSelected={curFilter?.split(" ")[0]}
           onClick={
-            curFilter
+            curFilter?.split(" ")[0]
               ? () => onClick("product", curFilter)
               : () => {
                   return;
@@ -41,9 +41,13 @@ const Product = ({ onClick }) => {
           }
         >
           <Text
-            cursor={curFilter ? "pointer" : "none"}
+            cursor={curFilter?.split(" ")[0] ? "pointer" : "none"}
             size={12}
-            color={curFilter ? palette.color_white : palette.color_white}
+            color={
+              curFilter?.split(" ")[0]
+                ? palette.color_white
+                : palette.color_white
+            }
           >
             확인
           </Text>
@@ -63,10 +67,13 @@ const ConfirmBtn = styled.div`
   pointer-events: ${({ isSelected }) => (isSelected ? "visible" : "none")};
 `;
 
-const EachItem = ({ src, name, onClick, click }) => {
+const EachItem = ({ src, name, onClick, click, unique }) => {
   const isClicked = click === name;
   return (
-    <ItemWrapper onClick={() => onClick(name)} isClicked={isClicked}>
+    <ItemWrapper
+      onClick={() => onClick(`${name} ${unique}`)}
+      isClicked={isClicked}
+    >
       <Flex justify="space-between">
         <div style={{ width: "100%", height: "75px" }}>
           <Flex height="100%">
