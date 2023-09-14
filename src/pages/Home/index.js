@@ -16,8 +16,30 @@ import indicator from "@assets/indicator.svg";
 import Blue1 from "@assets/Blue1.png";
 import Blue2 from "@assets/Blue2.svg";
 import { blueData } from "@utils/maindata";
+import axios from "axios";
 
 const Home = () => {
+  const apiKey = process.env.REACT_APP_FOUND_PW;
+  const apiUrl = process.env.REACT_APP_SERVERL_URL;
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${apiUrl}/bluemarble/buildings/`, {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+        },
+      })
+      .then((response) => {
+        setData(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [buttonClicked, setButtonClicked] = useState({});
   const [selectedButtons, setSelectedButtons] = useState([]);
@@ -902,7 +924,7 @@ const Home = () => {
                   부루마블 이벤트 현황
                 </Text>
               </Flex>
-              {[...blueData].splice(0, blueData.length).map((el, idx) => (
+              {[...data].splice(0, data.length).map((el, idx) => (
                 <ItemBox
                   height="65px"
                   width="80%"
@@ -912,13 +934,13 @@ const Home = () => {
                   align="center"
                 >
                   <Text size={18.75} color={palette.color_beige}>
-                    {el.building}
+                    {el.building_name}
                   </Text>
                   <Text size={18.75} color={palette.color_beige}>
-                    {el.name}
+                    {el.team}
                   </Text>
                   <Text size={18.75} color={palette.color_beige}>
-                    {el.money}
+                    {el.price}
                   </Text>
                 </ItemBox>
               ))}
