@@ -24,6 +24,12 @@
     "analyze": "craco build",
     "postbuild": "react-snap"
   },
+  "reactSnap": {
+      "puppeteerArgs": [
+        "--no-sandbox",
+        "--disable-setuid-sandbox"
+      ]
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -48,5 +54,6 @@
     "react-snap": "^1.23.0",
     "terser-webpack-plugin": "^5.3.9",
     "webpack-bundle-analyzer": "^4.9.1"
-  }
+  },
+
 }
