@@ -70,44 +70,23 @@ const DetailLost = () => {
   }, []);
   return (
     <>
-      <Helmet
-        title={"2023 CARDINAL : 응답하라 서강"}
-        meta={[
-          { itemProp: "keywords", content: "분실물" },
-          { itemProp: "name", content: data?.title },
-          { itemProp: "description", content: data?.content },
-          { itemProp: "image", content: data?.image1 },
-          {
-            property: "og:site_name",
-            content: "2023 CARDINAL : 응답하라 서강",
-          },
-          {
-            itemProp: "og:url",
-            content: `https://www.sgucardinal.com/lost/${id}`,
-          },
-          { rel: "canonical", href: `https://www.sgucardinal.com/lost/${id}` },
-          {
-            itemProp: "og:image",
-            content: data?.image1 ? data?.image1 : logo,
-          },
-          {
-            itemProp: "og:description",
-            content: data?.content,
-          },
-          {
-            itemProp: "twitter:title",
-            content: data?.title,
-          },
-          {
-            itemProp: "twitter:description",
-            content: data?.content,
-          },
-          {
-            itemProp: "twitter:image",
-            content: data?.image1 ? data?.image1 : logo,
-          },
-        ]}
-      />
+      <Helmet>
+        <title>2023 CARDINAL : 응답하라 서강</title>
+        <meta name="keywords" content="분실물" />
+        <meta name="description" content={data?.content} />
+        <meta name="image" content={data?.image1 || logo} />
+        <meta property="og:site_name" content="2023 CARDINAL : 응답하라 서강" />
+        <meta
+          property="og:url"
+          content={`https://www.sgucardinal.com/lost/${id}`}
+        />
+        <link rel="canonical" href={`https://www.sgucardinal.com/lost/${id}`} />
+        <meta property="og:image" content={data?.image1 || logo} />
+        <meta property="og:description" content={data?.content} />
+        <meta name="twitter:title" content={data?.title} />
+        <meta name="twitter:description" content={data?.content} />
+        <meta name="twitter:image" content={data?.image1 || logo} />
+      </Helmet>
 
       {data ? (
         <Flex align="start">
