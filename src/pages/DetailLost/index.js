@@ -14,6 +14,10 @@ import kakao from "@assets/kakao.svg";
 import copy from "@assets/copy.svg";
 import Service from "services/sgFestival";
 import { calculateTime } from "@utils/lib";
+import MetaTag from "SEO";
+import { config } from "@utils/SEOConfig";
+import logo from "@assets/logo.png";
+import { Helmet } from "react-helmet-async";
 
 const DetailLost = () => {
   const { id } = useParams();
@@ -66,6 +70,45 @@ const DetailLost = () => {
   }, []);
   return (
     <>
+      <Helmet
+        title={"2023 CARDINAL : 응답하라 서강"}
+        meta={[
+          { itemProp: "keywords", content: "분실물" },
+          { itemProp: "name", content: data?.title },
+          { itemProp: "description", content: data?.content },
+          { itemProp: "image", content: data?.image1 },
+          {
+            property: "og:site_name",
+            content: "2023 CARDINAL : 응답하라 서강",
+          },
+          {
+            itemProp: "og:url",
+            content: `https://www.sgucardinal.com/lost/${id}`,
+          },
+          { rel: "canonical", href: `https://www.sgucardinal.com/lost/${id}` },
+          {
+            itemProp: "og:image",
+            content: data?.image1 ? data?.image1 : logo,
+          },
+          {
+            itemProp: "og:description",
+            content: data?.content,
+          },
+          {
+            itemProp: "twitter:title",
+            content: data?.title,
+          },
+          {
+            itemProp: "twitter:description",
+            content: data?.content,
+          },
+          {
+            itemProp: "twitter:image",
+            content: data?.image1 ? data?.image1 : logo,
+          },
+        ]}
+      />
+
       {data ? (
         <Flex align="start">
           <DetailTop>

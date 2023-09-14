@@ -1,27 +1,48 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
+import { config } from "@utils/SEOConfig";
+import logo from "@assets/logo.png";
 
-const MetaTag = (props) => {
+const MetaTag = () => {
   return (
-    <Helmet>
-      <title>{props.title}</title>
-
-      <meta name="description" content={props.description} />
-      <meta name="keywords" content={props.keywords} />
-
-      <meta property="og:type" content="website" />
-      <meta property="og:title" content={props.title} />
-      <meta property="og:site_name" content={props.title} />
-      <meta property="og:description" content={props.description} />
-      <meta property="og:image" content={props.imgsrc} />
-      <meta property="og:url" content={props.url} />
-
-      <meta name="twitter:title" content={props.title} />
-      <meta name="twitter:description" content={props.description} />
-      <meta name="twitter:image" content={props.imgsrc} />
-
-      <link rel="canonical" href={props.url} />
-    </Helmet>
+    <Helmet
+      title={"2023 CARDINAL : 응답하라 서강"}
+      meta={[
+        { itemProp: "keywords", content: "분실물" },
+        { itemProp: "name", content: config?.title },
+        { itemProp: "description", content: config?.description },
+        { itemProp: "image", content: config?.imgsrc },
+        {
+          property: "og:site_name",
+          content: config.title,
+        },
+        {
+          itemProp: "og:url",
+          content: `https://www.sgucardinal.com`,
+        },
+        { rel: "canonical", href: `https://www.sgucardinal.com` },
+        {
+          itemProp: "og:image",
+          content: config?.imgsrc ? config?.imgsrc : logo,
+        },
+        {
+          itemProp: "og:description",
+          content: config?.description,
+        },
+        {
+          itemProp: "twitter:title",
+          content: config?.title,
+        },
+        {
+          itemProp: "twitter:description",
+          content: config?.description,
+        },
+        {
+          itemProp: "twitter:image",
+          content: config?.imgsrc ? config?.imgsrc : logo,
+        },
+      ]}
+    />
   );
 };
 

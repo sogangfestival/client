@@ -1,7 +1,7 @@
 import { palette } from "@styles/palette";
 import React, { useState } from "react";
 import { css, keyframes, styled } from "styled-components";
-import map from "@assets/map.svg";
+import map from "@assets/map.png";
 import Flex from "@components/atoms/Flex";
 import { Space } from "@components/atoms/Space";
 import { mapData } from "@utils/data";
