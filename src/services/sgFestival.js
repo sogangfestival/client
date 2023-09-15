@@ -44,26 +44,9 @@ const Service = {
     instance.get(`/posts/acquis/`, {
       params: { page, color, type, keyword, place },
     }),
-  uploadPost: ({
-    title,
-    content,
-    place,
-    color,
-    type,
-    password,
-    image1,
-    flag,
-  }) =>
-    instance.post(`/posts/`, {
-      title,
-      content,
-      place,
-      color,
-      type,
-      password,
-      image1,
-      flag,
-    }),
+  uploadPost: (formData) => {
+    return instance.post(`/posts/`, formData);
+  },
   getEachPost: (id) => instance.get(`/posts/${id}`),
   getComments: (id) => instance.get("/comments/", { params: { pk: id } }),
   postComments: ({ id, comment, pwd = 123456145124, parent_comment = "" }) =>

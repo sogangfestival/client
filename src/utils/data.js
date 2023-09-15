@@ -57,7 +57,7 @@ export const mapData = [
     },
   },
   {
-    name: "다산관",
+    name: "D관",
     id: "d",
     coord: {
       x: 195,
@@ -122,7 +122,7 @@ export const mapData = [
     },
   },
   {
-    name: "경제관",
+    name: "GN관",
     id: "gn",
     coord: {
       x: 175,

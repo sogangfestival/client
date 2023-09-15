@@ -7,7 +7,7 @@ import reply from "@assets/reply.svg";
 import { palette } from "@styles/palette";
 import Tag from "../Tag";
 import { Link } from "react-router-dom";
-import { calculateTime } from "@utils/lib.js";
+import { calculateTime, converter } from "@utils/lib.js";
 
 const Item = ({
   id,
@@ -58,23 +58,47 @@ const Item = ({
                 </Text>
               </Flex>
             </Flex>
-            <Flex direction="row" justify="start" gap={12}>
-              <Tag>
-                <Text weight={500} lineHeight="100%" color={palette.color_wine}>
-                  #{place[0]}
-                </Text>
-              </Tag>
-              <Tag>
-                <Text weight={500} lineHeight="100%" color={palette.color_wine}>
-                  #{type[0]}
-                </Text>
-              </Tag>
+            <Flex direction="row" justify="start" gap={12} height="15px">
+              {place[0] ? (
+                <Tag>
+                  <Text
+                    weight={500}
+                    lineHeight="100%"
+                    color={palette.color_wine}
+                  >
+                    {`#${converter[place[0]]}`}
+                  </Text>
+                </Tag>
+              ) : (
+                ""
+              )}
 
-              <Tag>
-                <Text weight={500} lineHeight="100%" color={palette.color_wine}>
-                  #{color[0]}
-                </Text>
-              </Tag>
+              {type[0] ? (
+                <Tag>
+                  <Text
+                    weight={500}
+                    lineHeight="100%"
+                    color={palette.color_wine}
+                  >
+                    {`#${converter[type[0]]}`}
+                  </Text>
+                </Tag>
+              ) : (
+                ""
+              )}
+              {color[0] ? (
+                <Tag>
+                  <Text
+                    weight={500}
+                    lineHeight="100%"
+                    color={palette.color_wine}
+                  >
+                    {`#${converter[color[0]]}`}
+                  </Text>
+                </Tag>
+              ) : (
+                ""
+              )}
             </Flex>
           </Flex>
           <Text

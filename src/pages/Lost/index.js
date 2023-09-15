@@ -97,6 +97,7 @@ const Lost = () => {
           place,
         });
       }
+      console.log(data);
       setData(data.data);
     } catch (err) {
       console.error(err);
