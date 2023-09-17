@@ -6,17 +6,21 @@ import { hydrate, render } from "react-dom";
 
 const root = document.getElementById("root");
 if (root.hasChildNodes()) {
-  hydrate(
-    <HelmetProvider>
-      <App />
-    </HelmetProvider>,
-    root
-  );
+  if (navigator.userAgent !== "ReactSnap") {
+    hydrate(
+      <HelmetProvider>
+        <App />
+      </HelmetProvider>,
+      root
+    );
+  }
 } else {
-  render(
-    <HelmetProvider>
-      <App />
-    </HelmetProvider>,
-    root
-  );
+  if (navigator.userAgent !== "ReactSnap") {
+    render(
+      <HelmetProvider>
+        <App />
+      </HelmetProvider>,
+      root
+    );
+  }
 }
