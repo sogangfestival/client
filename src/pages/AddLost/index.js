@@ -38,7 +38,7 @@ const AddLost = () => {
 
   const [isModal, setIsModal] = useState(false);
 
-  const postPost = () => {
+  const postPost = async () => {
     try {
       const formData = new FormData();
       const dataList = [
@@ -69,14 +69,20 @@ const AddLost = () => {
 
       if (toggleValue.location) {
         formData.append("place", [toggleValue.location.split(" ")[1]]);
+      } else {
+        formData.append("place", "");
       }
       if (toggleValue.color) {
         formData.append("color", [toggleValue.color.split(" ")[1]]);
+      } else {
+        formData.append("color", "");
       }
       if (toggleValue.product) {
         formData.append("type", [toggleValue.product.split(" ")[1]]);
+      } else {
+        formData.append("type", "");
       }
-      const data = Service.uploadPost(formData);
+      const data = await Service.uploadPost(formData);
     } catch (err) {
       console.error(err);
     }

@@ -6,8 +6,8 @@ import styled from "styled-components";
 import { palette } from "@styles/palette";
 import { useState } from "react";
 import { Text } from "@components/atoms/Text";
-import left from "@assets/leftPage.svg";
-import right from "@assets/rightPage.svg";
+import left from "@assets/leftToggle.svg";
+import right from "@assets/rightToggle.svg";
 import yena from "@assets/yena.svg";
 import bignaughty from "@assets/bignaughty.svg";
 import ydbband from "@assets/ydbband.svg";
@@ -54,6 +54,8 @@ const Schedule = () => {
             <ChoiceWrapper>
               <img
                 src={left}
+                alt="toggle"
+                style={{ cursor: "pointer" }}
                 onClick={() => {
                   if (toggleSwitch === "축제일정") {
                     setToggleSwitch("이벤트");
@@ -79,6 +81,8 @@ const Schedule = () => {
             <ChoiceWrapper>
               <img
                 src={right}
+                alt="toggle"
+                style={{ cursor: "pointer" }}
                 onClick={() => {
                   if (toggleSwitch === "축제일정") {
                     setToggleSwitch("이벤트");
@@ -156,6 +160,8 @@ const Schedule = () => {
           <OccasionalEvent>
             <OccasionSwitch>
               <img
+                style={{ cursor: "pointer" }}
+                alt="switchBtn"
                 src={yesterday}
                 onClick={() => {
                   switch (EventSwitch) {
@@ -192,6 +198,8 @@ const Schedule = () => {
               </Text>
 
               <img
+                style={{ cursor: "pointer" }}
+                alt="switchBtn"
                 src={nextday}
                 onClick={() => {
                   switch (EventSwitch) {
@@ -222,14 +230,18 @@ const Schedule = () => {
                   <div key={day}>
                     {EventSwitch === day ? (
                       <EventRow>
-                        {EventData[day].map((event, eventIndex) => (
-                          <EventBox
-                            key={eventIndex}
-                            smallFont={event.length > 7 && event.length <= 15}
-                          >
-                            {event}
-                          </EventBox>
-                        ))}
+                        {EventData[day].map((event, eventIndex) => {
+                          console.log(event.length >= 15);
+                          return (
+                            <EventBox
+                              key={eventIndex}
+                              smallFont={event.length > 7 && event.length <= 15}
+                              verySmallFont={event.length >= 15}
+                            >
+                              {event}
+                            </EventBox>
+                          );
+                        })}
                       </EventRow>
                     ) : null}
                   </div>
@@ -322,7 +334,10 @@ const SwitchWrapper = styled.div`
 
 const ChoiceWrapper = styled.div`
   width: 50px;
-  height: 19px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 const Divider = styled.div`
   width: 228px;
@@ -387,20 +402,20 @@ const ImageBig = styled.div`
 const Place = styled.div`
   background-color: ${palette.color_wine};
   width: 100px;
-  height: 25px;
   border-radius: 5px;
   margin: 10px 6px;
-  padding: 5px;
+  padding: 4px 9px 4px 9px;
   box-shadow: 0px 4px 5px gray;
 `;
 const AlwaysEvent = styled.div``;
 const OccasionalEvent = styled.div`
   margin-bottom: 80px;
+  height: 100px;
 `;
 const OccasionSwitch = styled.div`
   background-color: ${palette.color_wine};
   width: 99px;
-  height: 23px;
+
   border-radius: 55px;
   margin: 8px 6px;
   padding: 5px;
@@ -415,7 +430,7 @@ const Event = styled.div`
   height: 24px;
   border-radius: 5px;
   margin: 3px 6px;
-  padding: 2px;
+  padding: 3.5px 9px 4px 9px;
   font-size: 12px;
   color: black;
   font-weight: 700;
@@ -431,7 +446,7 @@ const EventRow = styled.div`
 
 const EventBox = styled.div`
   border: 1px solid ${palette.color_beige};
-  width: 99px;
+  width: ${({ verySmallFont }) => (verySmallFont ? "110px" : "99px")};
   height: 24px;
   border-radius: 5px;
   margin: 3px 6px;
@@ -446,11 +461,7 @@ const EventBox = styled.div`
   white-space: nowrap;
   overflow: hidden;
   font-size: ${(props) =>
-    props.smallFont
-      ? props.verySmallFont
-        ? "9px"
-        : "10px"
-      : "12px"}; // 조건부로 폰트 크기 지정
+    props.smallFont ? (props.verySmallFont ? "9px" : "10px") : "12px"};
 `;
 const TableSection = styled.div`
   width: 364px;

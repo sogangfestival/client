@@ -13,7 +13,7 @@ import SearhImg from "@assets/search2.svg";
 import kakao from "@assets/kakao.svg";
 import copy from "@assets/copy.svg";
 import Service from "services/sgFestival";
-import { calculateTime } from "@utils/lib";
+import { calculateTime, converter } from "@utils/lib";
 import MetaTag from "SEO";
 import { config } from "@utils/SEOConfig";
 import logo from "@assets/logo.png";
@@ -118,7 +118,7 @@ const DetailLost = () => {
                         lineHeight="100%"
                         color={palette.color_white}
                       >
-                        #{data?.place[0]}
+                        #{converter[data?.place[0]]}
                       </Text>
                     </Tag>
                   ) : (
@@ -133,7 +133,7 @@ const DetailLost = () => {
                         lineHeight="100%"
                         color={palette.color_white}
                       >
-                        #{data?.type[0]}
+                        #{converter[data?.type[0]]}
                       </Text>
                     </Tag>
                   ) : (
@@ -148,7 +148,7 @@ const DetailLost = () => {
                         lineHeight="100%"
                         color={palette.color_white}
                       >
-                        #{data?.color[0]}
+                        #{converter[data?.color[0]]}
                       </Text>
                     </Tag>
                   ) : (
@@ -169,11 +169,15 @@ const DetailLost = () => {
           <Space height={"29px"} />
           <ContentSpace>
             <Flex align="start">
-              <ContentImg
-                alt="contentImg"
-                src={data.image1 ? data.image1 : iphone}
-              />
-              <Space height={"30px"} />
+              {data.image1 ? (
+                <>
+                  <ContentImg alt="contentImg" src={data.image1} />
+                  <Space height={"30px"} />
+                </>
+              ) : (
+                ""
+              )}
+
               <Text align="start" size={12} weight={500}>
                 {data.content}
               </Text>

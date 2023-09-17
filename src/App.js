@@ -3,15 +3,19 @@ import AppContainer from "@components/templates/AppContainer";
 import GlobalStyle from "@styles/GlobalStyle";
 import "@styles/font.css";
 import MetaTag from "SEO";
+import theme from "@styles/theme";
+import { ThemeProvider } from "@components/templates/ThemeProvider";
 
 function App() {
   return (
     <>
-      <GlobalStyle />
-      <AppContainer>
+      <ThemeProvider>
+        <GlobalStyle />
         <MetaTag />
-        <RouterComponent />
-      </AppContainer>
+        <AppContainer>
+          <RouterComponent />
+        </AppContainer>
+      </ThemeProvider>
     </>
   );
 }

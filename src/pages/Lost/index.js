@@ -17,6 +17,7 @@ import Product from "./components/Product";
 import FilterColor from "./components/FilterColor";
 import Spinner from "@components/organisms/Spinner";
 import Service from "services/sgFestival";
+import Footer from "@components/organisms/Footer";
 
 const Lost = () => {
   // 상단 탭 스위칭 용 state
@@ -97,7 +98,6 @@ const Lost = () => {
           place,
         });
       }
-      console.log(data);
       setData(data.data);
     } catch (err) {
       console.error(err);
@@ -150,6 +150,7 @@ const Lost = () => {
       {/* 데이터가 들어오지 않을 때  */}
       {lostData ? "" : <Spinner />}
       <Header />
+      <Footer />
       <Flex>
         <TopSwitchWrapper>
           <Flex direction="row">
@@ -397,6 +398,7 @@ const Lost = () => {
           </Flex>
         </FooterContainer>
       </Flex>
+      <Space height={"100px"} />
     </Flex>
   );
 };

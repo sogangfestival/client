@@ -7,11 +7,12 @@ import AddLost from "@pages/AddLost";
 import Map from "@pages/Map";
 import Food from "@pages/Food";
 import Schedule from "@pages/Schedule";
+import RealHome from "@pages/RealHome";
 const RouterComponent = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<RealHome />} />
         <Route path="/map" element={<Map />} />
         <Route path="/food" element={<Food />} />
         <Route path="/schedule" element={<Schedule />} />

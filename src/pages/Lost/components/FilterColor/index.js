@@ -11,7 +11,6 @@ const FilterColor = ({ onClick }) => {
   const [curFilter, setCurFilter] = useState(undefined);
 
   const changeColor = (val) => {
-    console.log(val);
     if (val?.split(" ")[0] === curFilter?.split(" ")[0]) {
       setCurFilter(undefined);
     } else {

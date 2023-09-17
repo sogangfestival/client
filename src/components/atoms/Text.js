@@ -13,10 +13,11 @@ export const Text = ({
   align = "center",
   isCut = false,
   cutLine = 1,
+  wrap = "break-word",
   onClick = () => {
     return;
   },
-  ...rest
+  whiteSpace = "normal",
 }) => {
   return (
     <StyledText
@@ -31,6 +32,8 @@ export const Text = ({
       cursor={cursor}
       lineHeight={lineHeight}
       cutLine={cutLine}
+      wrap={wrap}
+      whiteSpace={whiteSpace}
     >
       {children}
     </StyledText>
@@ -38,7 +41,8 @@ export const Text = ({
 };
 
 const StyledText = styled.span`
-  word-wrap: break-word;
+  white-space: ${({ whiteSpace }) => whiteSpace};
+  word-break: ${({ wrap }) => wrap};
   font-family: ${({ font }) => font};
   text-align: ${({ align }) => align};
   font-size: ${({ size }) => size}px;
