@@ -1,1051 +1,374 @@
-import Header from "@components/organisms/Header";
 import Flex from "@components/atoms/Flex";
-import { Text } from "@components/atoms/Text";
 import { Space } from "@components/atoms/Space";
-import { styled, css, keyframes } from "styled-components";
-import Line from "@assets/line.svg";
+import { Text } from "@components/atoms/Text";
+import Back from "@components/molecules/Back";
+import Header from "@components/organisms/Header";
 import { palette } from "@styles/palette";
-import Arrow from "@assets/arrow.svg";
-import React, { useState, useRef, useEffect } from "react";
-import Map from "@assets/schoolmap.svg";
-import ItemBox from "./components/ItemBox";
-import PullBar from "@assets/pullbar.png";
-import BottomBar from "@assets/bottombar.png";
-import { mapData } from "@utils/maindata";
-import indicator from "@assets/indicator.svg";
-import Blue1 from "@assets/Blue1.png";
-import Blue2 from "@assets/Blue2.svg";
-import { blueData } from "@utils/maindata";
-import axios from "axios";
+import React, { useState } from "react";
+import styled from "styled-components";
+import logoWhite from "@assets/logo_white.svg";
+import mainCard1 from "@assets/mainCard_1.svg";
+import Footer from "@components/organisms/Footer";
+import event1 from "@assets/event1.svg";
+import event2 from "@assets/event2.svg";
+import event3 from "@assets/event3.svg";
+import event4 from "@assets/event4.svg";
+import logo from "@assets/logo.svg";
+import MainModal from "./components/MainModal";
+import { useTheme } from "@components/templates/ThemeProvider";
+import { Link } from "react-router-dom";
+import people from "@assets/people.svg";
 
+const curEvent = [
+  {
+    title: "엠마오 이스케이프: dear.X",
+    desc: "과연 💘첫사랑 후보들💘 중에 엄마의 진짜 첫사랑은 누구일까?",
+    src: event1,
+  },
+  {
+    title: "응 다 팔아~ 서강문방구",
+    desc: "게임에 성공해 추억의 불량식품을 획득하자!",
+    src: event2,
+  },
+  {
+    title: "학교종이 땡!땡!땡!",
+    desc: "교수님을 피해 챌린지 런!",
+    src: event3,
+  },
+  {
+    title: "한강말고 서강: 엠뚜에서 낭만찾기",
+    desc: "캠핑의 메카, 이제는 한강보다 서강이라고!",
+    src: undefined,
+  },
+  {
+    title: "부루마불: 서강 보드 미니게임",
+    desc: "서강대학교 보드 미니게임",
+    src: event4,
+  },
+];
 const Home = () => {
-  const apiKey = process.env.REACT_APP_FOUND_PW;
-  const apiUrl = process.env.REACT_APP_SERVERL_URL;
-
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(`${apiUrl}/bluemarble/buildings/`, {
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-        },
-      })
-      .then((response) => {
-        setData(response.data);
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
-
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [buttonClicked, setButtonClicked] = useState({});
-  const [selectedButtons, setSelectedButtons] = useState([]);
-  const [toggleSwitch, setToggleSwitch] = useState("학교");
-  const menuRef = useRef(null);
-
-  const handleResetButtonClick = () => {
-    setSelectedButtons([]);
-  };
-
-  useEffect(() => {
-    const handleClickeInsideMenu = (event) => {
-      if (menuRef.current && menuRef.current.contains(event.target)) {
-        return;
-      }
-      setIsMenuOpen(false);
-    };
-    document.addEventListener("mousedown", handleClickeInsideMenu);
-    return () => {
-      document.removeEventListener("mousedown", handleClickeInsideMenu);
-    };
-  }, []);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  const toggleSelectedButton = (buttonName) => {
-    setSelectedButtons((prevSelectedButtons) => {
-      if (prevSelectedButtons.includes(buttonName)) {
-        return prevSelectedButtons.filter((name) => name !== buttonName);
-      } else {
-        return [...prevSelectedButtons, buttonName];
-      }
-    });
-  };
-
+  const [ThemeMode, toggleTheme] = useTheme();
+  const [curModal, setCurModal] = useState(undefined);
   return (
-    <Flex>
-      <ToggleBtn>
-        <Flex direction="row" height="100%">
-          <ChoiceWrapper
+    <div style={{ width: "100%", positon: "relative" }}>
+      {ThemeMode === "onModal" ? (
+        <MainModal curModal={curModal} closeModal={toggleTheme} />
+      ) : (
+        ""
+      )}
+      <Header />
+      <Footer />
+      <HomeContainer>
+        <Flex>
+          <Space height={"10px"} />
+          <TopSlogan>
+            <Flex justify="start" align="start">
+              <Text color={palette.color_wine} size={24} weight={700}>
+                서강대학교
+              </Text>
+              <Text color={palette.color_wine} size={24} weight={700}>
+                카디널 : 2023
+              </Text>
+              <Space height={"10px"} />
+              <Text color={palette.color_subText} size={14} weight={400}>
+                새로운 이름과 함께 다시 태어난
+              </Text>
+              <Text color={palette.color_subText} size={14} weight={400}>
+                서강대학교의 하반기 대축제
+              </Text>
+            </Flex>
+          </TopSlogan>
+          <Space height={"16px"} />
+          <div
             onClick={() => {
-              setToggleSwitch("학교");
+              setCurModal("main");
+              toggleTheme("onModal");
             }}
-            isClicked={toggleSwitch === "학교"}
+            style={{ position: "relative", width: "100%", cussor: "pointer" }}
           >
-            <Text
-              size={12}
-              color={
-                toggleSwitch === "학교"
-                  ? palette.color_wine
-                  : palette.color_beige
-              }
-            >
-              학교
-            </Text>
-          </ChoiceWrapper>
-          <ChoiceWrapper
-            onClick={() => {
-              setToggleSwitch("이벤트");
-            }}
-            isClicked={toggleSwitch === "이벤트"}
-          >
-            <Text
-              size={12}
-              color={
-                toggleSwitch === "이벤트"
-                  ? palette.color_wine
-                  : palette.color_beige
-              }
-            >
-              이벤트
-            </Text>
-          </ChoiceWrapper>
-        </Flex>
-      </ToggleBtn>
-      <Header style={{ position: "relative" }} />
-      <Flex direction="column" height="40px" justify="start">
-        <Text size={15}>지도</Text>
-      </Flex>
-      {toggleSwitch === "학교" ? (
-        <>
-          <SelectionContainer>
-            <Flex
-              direction="column"
-              height="100%"
-              width="100%"
-              justify="center"
-              align="center"
-            >
-              <Flex direction="row" justify="space-around">
-                <SelectionBtn onClick={toggleMenu}>
-                  <Flex
-                    direction="row"
-                    height="100%"
-                    justify="center"
-                    align="center"
-                  >
-                    <Text color={palette.color_wine} size={12}>
-                      건물 이름
-                    </Text>
-                  </Flex>
-                  <img
-                    src={Arrow}
-                    style={{ position: "absolute", top: "48%", right: "5%" }}
-                  />
-                </SelectionBtn>
-                <img src={Line} />
-                <Text
-                  size={12}
-                  cursor="pointer"
-                  color={palette.color_beige}
-                  onClick={handleResetButtonClick}
-                >
-                  초기화
-                </Text>
-              </Flex>
-            </Flex>
-          </SelectionContainer>
-          <Flex width="100%" height="400px" justify="center" align="center">
-            <MapWrapper>
-              <img src={Map} />
-              <IndicatorContainer x={285} y={163}>
-                <img
-                  src={indicator}
-                  alt="indicator"
-                  width={"16px"}
-                  height={"23px"}
-                />
-              </IndicatorContainer>
-              {mapData.map((el) => (
-                <IndicatorContainer
-                  isClicked={selectedButtons.includes(el.name)}
-                  x={el.coord.x}
-                  y={el.coord.y}
-                  key={el.name}
-                >
-                  <img
-                    src={indicator}
-                    alt="indicator"
-                    width={"16px"}
-                    height={"23px"}
-                  />
-                </IndicatorContainer>
-              ))}
-            </MapWrapper>
-          </Flex>
-          <Flex direction="column" gap={15}>
-            <Flex height="50px">
-              <Text color={palette.color_mainText} size={25}>
-                푸드트럭 안내
+            <MainCard src={mainCard1} />
+            <img
+              style={{
+                cursor: "pointer",
+                position: "absolute",
+                zIndex: 2,
+                left: "8px",
+                top: "110px",
+              }}
+              alt="logo"
+              src={logoWhite}
+            />
+          </div>
+          <EventContainer>
+            <Flex justify="start" align="start">
+              <Text align="start" size={24} weight={700}>
+                진행중인 이벤트
               </Text>
-            </Flex>
-            <Flex height="40px">
-              <Text color={palette.color_wine} size={20}>
-                K-GN
-              </Text>
-            </Flex>
-            <ItemBox width="80%" height="140px" background={palette.color_icon}>
-              <Flex>
-                <Flex width="80%" height="100%">
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Text size={14} weight={700} color={palette.color_mainText}>
-                      곱창좋은날ㆍ곱창
-                    </Text>
-                  </Flex>
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={400}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;기본</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        13,0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={400}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;중</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        18,0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={400}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;기본</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        23,0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Flex>
-            </ItemBox>
-            <ItemBox width="80%" height="108px" background={palette.color_icon}>
-              <Flex>
-                <Flex width="80%" height="100%">
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Text size={14} weight={700} color={palette.color_mainText}>
-                      고피자ㆍ피자
-                    </Text>
-                  </Flex>
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={400}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;아메리칸 치즈 피자</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        10,0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={400}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;오리지널 페퍼로니 피자</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        12,0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Flex>
-            </ItemBox>
-            <ItemBox width="80%" height="50px" background={palette.color_icon}>
-              <Flex>
-                <Flex width="80%" height="100%">
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;미스터블랙ㆍ흑돼지덮밥</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        9,0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Flex>
-            </ItemBox>
-            <ItemBox width="80%" height="50px" background={palette.color_icon}>
-              <Flex>
-                <Flex width="80%" height="100%">
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;그레잇ㆍ크레페</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        6,0 ~ 8,0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Flex>
-            </ItemBox>
-            <ItemBox width="80%" height="50px" background={palette.color_icon}>
-              <Flex>
-                <Flex width="80%" height="100%">
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;비포ㆍ커피&칵테일&음료</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        3,5 ~ 5,0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Flex>
-            </ItemBox>
-            <ItemBox width="80%" height="108px" background={palette.color_icon}>
-              <Flex>
-                <Flex width="80%" height="100%">
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Text size={14} weight={700} color={palette.color_mainText}>
-                      체리블라썸
-                    </Text>
-                  </Flex>
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={400}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;타코야끼</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        6,0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={400}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;소떡소떡</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        4,0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Flex>
-            </ItemBox>
-            <ItemBox width="80%" height="50px" background={palette.color_icon}>
-              <Flex>
-                <Flex width="80%" height="100%">
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;블랙래빗ㆍ닭강정</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        10,0 / 15,0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Flex>
-            </ItemBox>
-            <ItemBox width="80%" height="50px" background={palette.color_icon}>
-              <Flex>
-                <Flex width="80%" height="100%">
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;스낵런ㆍ탕후루</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        3,5 ~ 4,5
-                      </Text>
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Flex>
-            </ItemBox>
-            <ItemBox width="80%" height="50px" background={palette.color_icon}>
-              <Flex>
-                <Flex width="80%" height="100%">
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={13}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;월드푸드ㆍ츄러스&회오리감자</div>
-                      </Text>
-                      <Text
-                        size={13}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        4,0 / 4,0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Flex>
-            </ItemBox>
-            <ItemBox width="80%" height="140px" background={palette.color_icon}>
-              <Flex>
-                <Flex width="80%" height="100%">
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Text size={14} weight={700} color={palette.color_mainText}>
-                      무빙스낵ㆍ분식
-                    </Text>
-                  </Flex>
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={400}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;떡볶이</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        5,0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={400}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;순대</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        5,0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={400}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;튀김</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        3,0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Flex>
-            </ItemBox>
-            <Flex height="40px">
-              <Text color={palette.color_wine} size={20}>
-                CY-J
-              </Text>
-            </Flex>
-            <ItemBox width="80%" height="50px" background={palette.color_icon}>
-              <Flex>
-                <Flex width="80%" height="100%">
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;흔남스시ㆍ불초밥</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        10,0 ~ 12,0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Flex>
-            </ItemBox>
-            <ItemBox width="80%" height="50px" background={palette.color_icon}>
-              <Flex>
-                <Flex width="80%" height="100%">
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;짱츄닭ㆍ수제닭꼬치</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        5,0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Flex>
-            </ItemBox>
-            <ItemBox width="80%" height="140px" background={palette.color_icon}>
-              <Flex>
-                <Flex width="80%" height="100%">
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Text size={14} weight={700} color={palette.color_mainText}>
-                      블랙스테이크ㆍ스테이크
-                    </Text>
-                  </Flex>
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={400}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;싱글</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        10,0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={400}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;더블</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        15,0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={400}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;덮밥</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        10,0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Flex>
-            </ItemBox>
-            <ItemBox width="80%" height="50px" background={palette.color_icon}>
-              <Flex>
-                <Flex width="80%" height="100%">
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;탑클래스ㆍ케밥&소시지</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        4,0 ~ 9,0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Flex>
-            </ItemBox>
-            <ItemBox width="80%" height="50px" background={palette.color_icon}>
-              <Flex>
-                <Flex width="80%" height="100%">
-                  <Flex
-                    width="100%"
-                    height="100%"
-                    direction="row"
-                    justify="start"
-                  >
-                    <Flex justify="space-between" direction="row">
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        <div>&nbsp;&nbsp;에이치키친ㆍ야끼소바</div>
-                      </Text>
-                      <Text
-                        size={14}
-                        weight={700}
-                        color={palette.color_mainText}
-                      >
-                        10.0
-                      </Text>
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Flex>
-            </ItemBox>
-          </Flex>
-          <Flex>
-            <Menu isOpen={isMenuOpen} ref={menuRef}>
-              <Flex gap={10}>
-                <img src={PullBar} />
-                <Text size={15} color={palette.color_mainText}>
-                  건물 목록
-                </Text>
-                <Space height={15} />
-                <img src={BottomBar} />
-                <Flex
-                  direction="row"
-                  width="80%"
-                  wrap="wrap"
-                  gap={10}
-                  justify="start"
-                >
-                  {[...mapData].splice(0, mapData.length).map((el, idx) => (
-                    <TagBtn
-                      isClicked={selectedButtons.includes(el.name)}
-                      key={idx}
-                      onClick={() => toggleSelectedButton(el.name)}
+              <Space height={"13px"} />
+              <>
+                <Flex wrap="noWrap" direction="row" justify="start" gap={12}>
+                  {curEvent.map((el, idx) => (
+                    <div
+                      onClick={() => {
+                        setCurModal(idx);
+                        toggleTheme("onModal");
+                      }}
+                      key={el.title}
+                      style={{
+                        cursor: "pointer",
+                        width: "118px",
+                        height: "180px",
+                        backgroundColor: "white",
+                        boxShadow: `0px 4px 5px 0px rgba(125, 1, 38, 0.20)`,
+                        borderRadius: "7px",
+                      }}
                     >
-                      <Text
-                        color={
-                          selectedButtons.includes(el.name)
-                            ? palette.color_beige
-                            : palette.color_wine
-                        }
-                        cursor="pointer"
-                      >
-                        {el.name}
-                      </Text>
-                    </TagBtn>
+                      <img
+                        src={el.src ? el.src : logo}
+                        alt={"event_banner"}
+                        style={{ cursor: "pointer", objectFit: "contain" }}
+                        width={"115px"}
+                        height={"83px"}
+                      />
+                      <div style={{ width: "100%", padding: "6px" }}>
+                        <Flex justify="start" direction="row">
+                          <Text
+                            wrap="keep-all"
+                            align="start"
+                            size={13}
+                            weight={700}
+                            color={palette.color_mainText}
+                          >
+                            {el.title}
+                          </Text>
+                        </Flex>
+                        <Space height={"5px"} />
+                        <Flex justify="start" direction="row">
+                          <Text
+                            wrap="keep-all"
+                            align="start"
+                            size={10}
+                            weight={400}
+                            color={palette.color_subText}
+                          >
+                            {el.desc}
+                          </Text>
+                        </Flex>
+                      </div>
+                    </div>
                   ))}
                 </Flex>
+              </>
+            </Flex>
+          </EventContainer>
+          <Space height={"19px"} />
+          <div style={{ width: "100%" }}>
+            <Flex justify="start" align="start">
+              <Text align="start" size={24} weight={700}>
+                구글폼 신청
+              </Text>
+              <Space height={"13px"} />
+              <CurEventWrapper>
+                <EachForm>
+                  <Flex direction="row" justify="space-between">
+                    <Flex width="auto" direction="row" justify="start" gap={8}>
+                      <Link
+                        target="blank"
+                        style={{ textDecoration: "none" }}
+                        to={"https://forms.gle/scwX8QtJLSz42vGq7"}
+                      >
+                        <Text
+                          align="start"
+                          cursor="pointer"
+                          size={13}
+                          weight={500}
+                        >
+                          🏕 한강 말고 서강 사전예약
+                        </Text>
+                      </Link>
+                      <Flex width="auto" direction="row" justify="start">
+                        <img src={people} alt="people" />
+                        <Text
+                          size={13}
+                          color={palette.color_subText}
+                          weight={700}
+                        >
+                          6명
+                        </Text>
+                      </Flex>
+                    </Flex>
+
+                    <Text>9.18(월) 11:50~</Text>
+                  </Flex>
+                </EachForm>
+              </CurEventWrapper>
+            </Flex>
+          </div>
+        </Flex>
+        <Space height={"120px"} />
+        <HomeFooter>
+          <Flex align="start">
+            <Text size={16} weight={700}>
+              제작자
+            </Text>
+            <Space height={"15px"} />
+            <Flex direction="row" justify="space-between" align="start">
+              <Flex width="auto" gap={15} align="start" justify="start">
+                <Text size={12} weight={700} color={palette.color_subText}>
+                  멋쟁이사자처럼
+                </Text>
+                <Flex align="start" gap={3}>
+                  <Text size={12} weight={700} color={palette.color_subText}>
+                    프론트엔드
+                  </Text>
+                  <Text size={12} weight={400} color={palette.color_subText}>
+                    진민석
+                  </Text>
+                  <Text size={12} weight={400} color={palette.color_subText}>
+                    정고은
+                  </Text>
+                  <Text size={12} weight={400} color={palette.color_subText}>
+                    한우석
+                  </Text>
+                </Flex>
               </Flex>
-            </Menu>
-          </Flex>
-        </>
-      ) : (
-        <>
-          <Flex>
-            <img src={Blue1} />
-            <img src={Blue2} />
-            <Flex direction="column" gap={15}>
-              <Flex height="50px">
-                <Text color={palette.color_mainText} size={25}>
-                  부루마블 이벤트 현황
+              <Flex width="auto" gap={15} align="start" justify="start">
+                <Text size={12} weight={700} color={palette.color_subText}>
+                  총동아리연합학생회
+                </Text>
+                <Flex direction="row" justify="space-between">
+                  <Flex align="start" gap={3}>
+                    <Text size={12} weight={700} color={palette.color_subText}>
+                      총괄
+                    </Text>
+                    <Text size={12} weight={400} color={palette.color_subText}>
+                      범수빈
+                    </Text>
+                  </Flex>
+                  <Flex align="start" gap={3}>
+                    <Text size={12} weight={700} color={palette.color_subText}>
+                      디자인
+                    </Text>
+                    <Text size={12} weight={400} color={palette.color_subText}>
+                      하이은
+                    </Text>
+                  </Flex>
+                </Flex>
+              </Flex>
+              <Flex width="auto" gap={15} align="start" justify="start">
+                <Text size={12} weight={700} color={palette.color_subText}>
+                  총학생회
+                </Text>
+                <Flex align="start" gap={3}>
+                  <Text size={12} weight={700} color={palette.color_subText}>
+                    디자인
+                  </Text>
+                  <Text size={12} weight={400} color={palette.color_subText}>
+                    박종현
+                  </Text>
+                  <Text size={12} weight={400} color={palette.color_subText}>
+                    송인준
+                  </Text>
+                  <Text size={12} weight={400} color={palette.color_subText}>
+                    Eunice Gan
+                  </Text>
+                </Flex>
+              </Flex>
+            </Flex>
+            <Space height={"20px"} />
+            <Flex align="start" gap={3}>
+              <Text size={12} weight={700} color={palette.color_subText}>
+                백엔드
+              </Text>
+              <Flex justify="start" direction="row" gap={3}>
+                <Text size={12} weight={400} color={palette.color_subText}>
+                  김성현
+                </Text>
+                <Text size={12} weight={400} color={palette.color_subText}>
+                  신선희
+                </Text>
+                <Text size={12} weight={400} color={palette.color_subText}>
+                  이건화
+                </Text>
+                <Text size={12} weight={400} color={palette.color_subText}>
+                  이우찬
                 </Text>
               </Flex>
-              {[...data].splice(0, data.length).map((el, idx) => (
-                <ItemBox
-                  height="65px"
-                  width="80%"
-                  background={palette.color_wine}
-                  justify="space-around"
-                  direction="row"
-                  align="center"
-                >
-                  <Text size={18.75} color={palette.color_beige}>
-                    {el.building_name}
-                  </Text>
-                  <Text size={18.75} color={palette.color_beige}>
-                    {el.team}
-                  </Text>
-                  <Text size={18.75} color={palette.color_beige}>
-                    {el.price}
-                  </Text>
-                </ItemBox>
-              ))}
+              <Flex justify="start" direction="row" gap={3}>
+                <Text size={12} weight={400} color={palette.color_subText}>
+                  이종미
+                </Text>
+                <Text size={12} weight={400} color={palette.color_subText}>
+                  임정연
+                </Text>
+                <Text size={12} weight={400} color={palette.color_subText}>
+                  윤성호
+                </Text>
+                <Text size={12} weight={400} color={palette.color_subText}>
+                  윤태호
+                </Text>
+              </Flex>
             </Flex>
           </Flex>
-        </>
-      )}
-    </Flex>
+        </HomeFooter>
+      </HomeContainer>
+      <Space height={"90px"} />
+    </div>
   );
 };
 
-export default Home;
-
-const SelectionContainer = styled.div`
-  height: 77px;
-  width: 100%;
-  background-color: ${palette.color_wine};
+const HomeFooter = styled.div`
+  widht: 100%;
+  background-color: ${palette.color_icon};
+  padding: 6px;
+  border-radius: 10px 10px 0px 0px;
 `;
 
-const SelectionBtn = styled.div`
-  width: 252px;
-  height: 23px;
-  border-radius: 10px;
-  background: ${palette.color_beige};
-  position: relative;
-  cursor: pointer;
-`;
-
-const Menu = styled.div`
-  width: 100%;
-  max-width: 364px;
+const EachForm = styled.div`
+  padding: 5px 8px 7px 8px;
   background-color: white;
-  z-index: 1;
-  transform: translateY(${(props) => (props.isOpen ? "0" : "100%")});
-  bottom: ${(props) => (props.isOpen ? "0" : "-100%")};
-  opacity: ${(props) => (props.isOpen ? 1 : 0)};
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  position: fixed;
-  touch-action: pan-y; /* Enable vertical panning */
-`;
-
-const MenuItem = styled.div`
-  padding: 10px 20px;
-  cursor: pointer;
-  /* Add more styles as needed */
-`;
-
-const TagBtn = styled.div`
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 10px;
-  display: flex;
-  background-color: ${({ isClicked }) =>
-    isClicked ? palette.color_wine : palette.color_beige};
-`;
-
-const IndicatorContainer = styled.div`
-  position: absolute;
-  top: ${({ y }) => y}px;
-  left: ${({ x }) => x}px;
-  opacity: 0%;
-  ${({ isClicked }) =>
-    isClicked
-      ? css`
-          pointer-events: visible;
-          animation: ${fadeUp} 0.3s linear forwards;
-        `
-      : css`
-          pointer-events: none;
-        `}
-`;
-
-const MapWrapper = styled.div`
-  position: relative;
+  box-shadow: 0px 4px 20px 0px rgba(125, 1, 38, 0.2);
+  border-radius: 5px;
+  border: 1px;
   width: 100%;
-  height: 400px;
-  margin-top: 40px;
 `;
 
-const fadeUp = keyframes`
-  0% {
-    transform: translateY(10px);
-    opacity : 0%; 
-  }
-  100% {
-    transform: translateY(0px); 
-    opacity : 100%; 
-  }
+const CurEventWrapper = styled.div`
+  width: 100%;
 `;
 
-const ToggleBtn = styled.div`
-  width: 148px;
-  height: 23px;
-  border-radius: 10px;
-  background-color: ${palette.color_wine};
-  position: absolute;
-  top: 520px;
+const EventContainer = styled.div`
+  width: 100%;
+  padding: 3px;
+  overflow-x: scroll;
 `;
 
-const ChoiceWrapper = styled.div`
-  width: 72px;
-  height: 19px;
-  border-radius: 10px;
-  background-color: ${(props) =>
-    props.isClicked ? palette.color_beige : palette.color_wine};
+const MainCard = styled.img`
   cursor: pointer;
-  z-index: 1;
+  width: 312px;
+  height: 312px;
+  border-radius: 20px;
+  filter: drop-shadow(0px 4px 20px rgba(125, 1, 38, 0.2));
 `;
+
+const MainCardOver = styled.div`
+  width: 100%;
+  position: absoulte;
+`;
+
+const TopBanner = styled.div`
+  width: 100%;
+`;
+
+const TopSlogan = styled.div`
+  width: 100%;
+  border-left: 1px solid ${palette.color_wine};
+  padding-left: 9px;
+`;
+
+const HomeContainer = styled.div`
+  width: 100%;
+  padding: 0px 24px;
+`;
+
+export default Home;
