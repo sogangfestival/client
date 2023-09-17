@@ -40,7 +40,7 @@ const Schedule = () => {
       "노고체전 짱피구",
     ],
     목: ["부루마불", "동아리 공연", "아티스트 본판"],
-    금: ["부루바불", "학회, 소모임 및 밴드 공연", "아티스트 본판"],
+    금: ["부루바불", "학회소모임 및 밴드공연", "아티스트 본판"],
   };
 
   return (
@@ -445,8 +445,13 @@ const EventRow = styled.div`
 `;
 
 const EventBox = styled.div`
+<<<<<<< HEAD
   border: 1px solid ${palette.color_beige};
   width: ${({ verySmallFont }) => (verySmallFont ? "110px" : "99px")};
+=======
+  border: ${palette.color_beige};
+  width: 99px;
+>>>>>>> 500b98f6da7cf98d3bf75db467c1d62ef48146e3
   height: 24px;
   border-radius: 5px;
   margin: 3px 6px;
