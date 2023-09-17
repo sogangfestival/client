@@ -4,9 +4,11 @@ import Header from "@components/organisms/Header";
 import Flex from "@components/atoms/Flex";
 import { palette } from "@styles/palette";
 import { Text } from "@components/atoms/Text";
+import Footer from "@components/organisms/Footer";
 const Food = () => {
   return (
     <Flex>
+      <Footer />
       <Header />
       <Flex direction="column" gap={15}>
         <Flex height="50px">

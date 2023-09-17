@@ -17,6 +17,7 @@ import Blue1 from "@assets/Blue1.png";
 import Blue2 from "@assets/Blue2.svg";
 import { blueData } from "@utils/maindata";
 import axios from "axios";
+import Footer from "@components/organisms/Footer";
 
 const Map = () => {
   const apiKey = process.env.REACT_APP_FOUND_PW;
@@ -117,6 +118,7 @@ const Map = () => {
         </Flex>
       </ToggleBtn>
       <Header style={{ position: "relative" }} />
+      <Footer />
       <Flex direction="column" height="40px" justify="start">
         <Text size={15}>지도</Text>
       </Flex>
