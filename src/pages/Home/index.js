@@ -58,7 +58,6 @@ const Home = () => {
         ""
       )}
       <Header />
-      <img src={seo} />
       <Footer />
       <HomeContainer>
         <Flex>
