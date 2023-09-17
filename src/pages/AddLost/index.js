@@ -68,21 +68,19 @@ const AddLost = () => {
       });
 
       if (toggleValue.location) {
+        console.log(toggleValue.location);
         formData.append("place", [toggleValue.location.split(" ")[1]]);
-      } else {
-        formData.append("place", "");
       }
       if (toggleValue.color) {
         formData.append("color", [toggleValue.color.split(" ")[1]]);
-      } else {
-        formData.append("color", "");
       }
       if (toggleValue.product) {
         formData.append("type", [toggleValue.product.split(" ")[1]]);
-      } else {
-        formData.append("type", "");
       }
+      console.log(toggleValue.location, toggleValue.color, toggleValue.product);
       const data = await Service.uploadPost(formData);
+
+      console.log(data);
     } catch (err) {
       console.error(err);
     }

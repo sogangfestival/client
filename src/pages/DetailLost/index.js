@@ -14,23 +14,29 @@ import kakao from "@assets/kakao.svg";
 import copy from "@assets/copy.svg";
 import Service from "services/sgFestival";
 import { calculateTime, converter } from "@utils/lib";
-import MetaTag from "SEO";
-import { config } from "@utils/SEOConfig";
-import logo from "@assets/logo.png";
+import logo from "@assets/seo.png";
 import { Helmet } from "react-helmet-async";
+import Modal from "./components/Modal";
+import { useTheme } from "@components/templates/ThemeProvider";
 
 const DetailLost = () => {
   const { id } = useParams();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(undefined);
   const [comment, setComment] = useState(undefined);
   const [parent_comment, setParent] = useState("");
   const [pwd, setPwd] = useState(1);
+  const [isModal, setIsModal] = useState(false);
+  const [ThemeMode, toggleTheme] = useTheme();
 
   const postComment = async () => {
     if (!comment) {
       alert("최소 1자 이상 적어주세요");
       return;
     }
+    setIsModal(true);
+  };
+
+  const requestPost = async () => {
     try {
       const data = await Service.postComments({
         id,
@@ -43,6 +49,8 @@ const DetailLost = () => {
     } catch (err) {
       console.error(err);
     }
+    setIsModal(false);
+    toggleTheme("offModal");
   };
 
   const copyLink = async () => {
@@ -68,8 +76,9 @@ const DetailLost = () => {
       getPost();
     }
   }, []);
+
   return (
-    <>
+    <div style={{ width: "100%", position: "relative" }}>
       <Helmet>
         <title>2023 CARDINAL : 응답하라 서강</title>
         <meta name="keywords" content="분실물" />
@@ -87,14 +96,14 @@ const DetailLost = () => {
         <meta name="twitter:description" content={data?.content} />
         <meta name="twitter:image" content={data?.image1 || logo} />
       </Helmet>
-
+      {isModal ? <Modal setPwd={setPwd} requestPost={requestPost} /> : ""}
       {data ? (
         <Flex align="start">
           <DetailTop>
             <Flex gap={99} direction="row" justify="start">
               <Back />
               <Text size={18} weight={700}>
-                분실물 게시판
+                {data?.flag ? "습득물 게시판" : "분실물 게시판"}
               </Text>
             </Flex>
           </DetailTop>
@@ -106,11 +115,11 @@ const DetailLost = () => {
                     {data?.title}
                   </Text>
                   <Text color={palette.color_subText} size={10} weight={400}>
-                    {data.created_at ? calculateTime(data.created_at) : ""}
+                    {data?.created_at ? calculateTime(data?.created_at) : ""}
                   </Text>
                 </Flex>
                 <Flex direction="row" justify="start" gap={18}>
-                  {data.place ? (
+                  {data.place[0] ? (
                     <Tag padding="5px 8px" bgColor={palette.color_wine}>
                       <Text
                         size={10}
@@ -125,7 +134,7 @@ const DetailLost = () => {
                     ""
                   )}
 
-                  {data.type ? (
+                  {data?.type[0] ? (
                     <Tag padding="5px 8px" bgColor={palette.color_wine}>
                       <Text
                         size={10}
@@ -140,7 +149,7 @@ const DetailLost = () => {
                     ""
                   )}
 
-                  {data.color ? (
+                  {data?.color[0] ? (
                     <Tag padding="5px 8px" bgColor={palette.color_wine}>
                       <Text
                         size={10}
@@ -169,7 +178,7 @@ const DetailLost = () => {
           <Space height={"29px"} />
           <ContentSpace>
             <Flex align="start">
-              {data.image1 ? (
+              {data?.image1 ? (
                 <>
                   <ContentImg alt="contentImg" src={data.image1} />
                   <Space height={"30px"} />
@@ -179,7 +188,7 @@ const DetailLost = () => {
               )}
 
               <Text align="start" size={12} weight={500}>
-                {data.content}
+                {data?.content}
               </Text>
               <Space height={"23px"} />
             </Flex>
@@ -194,7 +203,12 @@ const DetailLost = () => {
           <ReplySpace>
             <Flex align="start" gap={15}>
               {data?.comments?.map((el, idx) => (
-                <Reply setParent={setParent} {...el} key={idx} />
+                <Reply
+                  parent={parent_comment}
+                  setParent={setParent}
+                  {...el}
+                  key={idx}
+                />
               ))}
             </Flex>
             <Space height={"20px"} />
@@ -206,7 +220,10 @@ const DetailLost = () => {
                   onChange={(e) => setComment(e.target.value)}
                 />
                 <img
-                  onClick={() => postComment()}
+                  onClick={() => {
+                    postComment();
+                    toggleTheme("onModal");
+                  }}
                   style={{ cursor: "pointer" }}
                   src={SearhImg}
                   alt="search"
@@ -244,7 +261,7 @@ const DetailLost = () => {
       ) : (
         ""
       )}
-    </>
+    </div>
   );
 };
 

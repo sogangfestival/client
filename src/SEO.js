@@ -1,12 +1,12 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { config } from "@utils/SEOConfig";
-import logo from "@assets/logo.png";
+import logo from "@assets/seo.png";
 
 const MetaTag = () => {
   return (
     <Helmet>
-      <title>2023 CARDINAL : 응답하라 서강</title>
+      <title>2023 CARDINAL</title>
       <meta property="keywords" content="분실물" />
       <meta property="name" content={config?.title} />
       <meta property="description" content={config?.description} />

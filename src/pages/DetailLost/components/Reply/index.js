@@ -8,17 +8,7 @@ import { palette } from "@styles/palette";
 import reply from "@assets/reply.svg";
 
 const Reply = React.memo(
-  ({
-    setParent,
-    content,
-    created_at,
-    id,
-    parent_comment,
-    password,
-    post,
-    writer,
-    sub_comments,
-  }) => {
+  ({ parent, setParent, content, created_at, id, writer, sub_comments }) => {
     const [isOnComment, setIsOnComment] = useState(false);
     const reReplyOnComment = () => {
       const isTrue = window.confirm("이 댓글에 대댓글을 작성하시겠습니까?");
@@ -30,7 +20,7 @@ const Reply = React.memo(
 
     useEffect(() => {
       setIsOnComment(false);
-    }, [id]);
+    }, [parent]);
     return (
       <ReplyContainer>
         <Flex gap={4} align="start" justify="start">
