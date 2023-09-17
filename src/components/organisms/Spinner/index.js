@@ -7,10 +7,10 @@ import { palette } from "@styles/palette";
 import { Space } from "@components/atoms/Space";
 
 const textData = [
-  "로딩 중...",
-  "알로스가 먹이를 찾는 중...",
-  "서강대 축제 텐션 높이는 중...",
-  "푸드 트럭 음식 준비 중...",
+  "잘못된 경로로 들어왔습니다...",
+  "다른 곳으로 가시오...",
+  "아무것도 찾을 수 없습니다...",
+  "뒤로 가기를 누르시오...",
 ];
 
 const Spinner = () => {
@@ -60,6 +60,7 @@ const SpinnerContainer = styled.div`
   width: 100%;
   position: absolute;
   z-index: 3;
+  top: 0px;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.8);
 `;
