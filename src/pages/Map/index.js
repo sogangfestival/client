@@ -7,7 +7,7 @@ import Line from "@assets/line.svg";
 import { palette } from "@styles/palette";
 import Arrow from "@assets/arrow.svg";
 import React, { useState, useRef, useEffect } from "react";
-import schoolmap from "@assets/schoolmap.svg";
+import schoolmap from "@assets/map.svg";
 import ItemBox from "./component/ItemBox";
 import PullBar from "@assets/pullbar.png";
 import BottomBar from "@assets/bottombar.png";
