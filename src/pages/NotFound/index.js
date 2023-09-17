@@ -4,6 +4,7 @@ import { Text } from "@components/atoms/Text";
 import Header from "@components/organisms/Header";
 import Spinner from "@components/organisms/Spinner";
 import React from "react";
+import styled from "styled-components";
 
 const PAGE404 = () => {
   return (

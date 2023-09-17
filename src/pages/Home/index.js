@@ -18,6 +18,7 @@ import MainModal from "./components/MainModal";
 import { useTheme } from "@components/templates/ThemeProvider";
 import { Link } from "react-router-dom";
 import people from "@assets/people.svg";
+import seo from "@assets/seo.png";
 
 const curEvent = [
   {
@@ -57,6 +58,7 @@ const Home = () => {
         ""
       )}
       <Header />
+      <img src={seo} />
       <Footer />
       <HomeContainer>
         <Flex>

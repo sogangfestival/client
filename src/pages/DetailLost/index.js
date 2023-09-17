@@ -80,7 +80,7 @@ const DetailLost = () => {
   return (
     <div style={{ width: "100%", position: "relative" }}>
       <Helmet>
-        <title>2023 CARDINAL : 응답하라 서강</title>
+        <title>2023 CARDINAL : 분실물 페이지</title>
         <meta name="keywords" content="분실물" />
         <meta name="description" content={data?.content} />
         <meta name="image" content={data?.image1 || logo} />
@@ -90,11 +90,18 @@ const DetailLost = () => {
           content={`https://www.sgucardinal.com/lost/${id}`}
         />
         <link rel="canonical" href={`https://www.sgucardinal.com/lost/${id}`} />
-        <meta property="og:image" content={data?.image1 || logo} />
-        <meta property="og:description" content={data?.content} />
+        <meta
+          property="og:title"
+          content={data?.title || "2023 CARDINAL 분실물 페이지"}
+        />
+        <meta property="og:image" content={logo} />
+        <meta
+          property="og:description"
+          content={data?.content || "2023 CARDINAL 분실물 페이지입니다"}
+        />
         <meta name="twitter:title" content={data?.title} />
         <meta name="twitter:description" content={data?.content} />
-        <meta name="twitter:image" content={data?.image1 || logo} />
+        <meta name="twitter:image" content={logo} />
       </Helmet>
       {isModal ? <Modal setPwd={setPwd} requestPost={requestPost} /> : ""}
       {data ? (
