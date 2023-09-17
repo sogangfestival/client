@@ -40,7 +40,7 @@ const Schedule = () => {
       "노고체전 짱피구",
     ],
     목: ["부루마불", "동아리 공연", "아티스트 본판"],
-    금: ["부루바불", "학회, 소모임 및 밴드 공연", "아티스트 본판"],
+    금: ["부루바불", "학회소모임 및 밴드공연", "아티스트 본판"],
   };
 
   return (
@@ -226,6 +226,7 @@ const Schedule = () => {
                           <EventBox
                             key={eventIndex}
                             smallFont={event.length > 7 && event.length <= 15}
+                            verySmallFont={event.length > 12}
                           >
                             {event}
                           </EventBox>
@@ -430,7 +431,7 @@ const EventRow = styled.div`
 `;
 
 const EventBox = styled.div`
-  border: 1px solid ${palette.color_beige};
+  border: ${palette.color_beige};
   width: 99px;
   height: 24px;
   border-radius: 5px;
