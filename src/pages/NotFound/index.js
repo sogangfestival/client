@@ -6,14 +6,20 @@ import Spinner from "@components/organisms/Spinner";
 import React from "react";
 import styled from "styled-components";
 
-const PAGE404 = () => {
+const NotFound = () => {
   return (
-    <div style={{ position: "relative", width: "100%", height: "100vh" }}>
+    <NotFoundWrapper>
       <Header />
       <Space height={"100px"} />
       <Spinner />
-    </div>
+    </NotFoundWrapper>
   );
 };
 
-export default PAGE404;
+const NotFoundWrapper = styled.div`
+  width: 100%;
+  position: relative;
+  height: 100vh;
+`;
+
+export default NotFound;

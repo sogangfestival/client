@@ -114,7 +114,7 @@ const MapItem = styled.div`
   background-color: ${({ isClicked }) =>
     isClicked ? palette.color_wine : palette.color_line};
   width: 100px;
-  height: 28px;
+  height: 20px;
   border-radius: 3px;
   cursor: pointer;
   display: flex;
@@ -129,7 +129,7 @@ const MapImg = styled.img`
 
 const MapContainer = styled.div`
   position: absolute;
-  top: 18px;
+  top: 12px;
   width: 100%;
   padding: 20px;
   background-color: ${palette.color_beige};

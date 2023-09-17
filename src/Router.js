@@ -7,7 +7,7 @@ import Map from "@pages/Map";
 import Food from "@pages/Food";
 import Schedule from "@pages/Schedule";
 import Home from "@pages/Home";
-import PAGE404 from "@pages/NotFound";
+import NotFound from "@pages/NotFound";
 const RouterComponent = () => {
   return (
     <BrowserRouter>
@@ -19,7 +19,7 @@ const RouterComponent = () => {
         <Route path="/lost" element={<Lost />} />
         <Route path="/lost/add" element={<AddLost />} />
         <Route path="/lost/:id" element={<DetailLost />} />
-        <Route path="/*" element={<PAGE404 />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

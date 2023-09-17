@@ -118,7 +118,7 @@ const DetailLost = () => {
             <Flex align="start">
               <Flex align="start" gap={15}>
                 <Flex align="start" gap={6}>
-                  <Text size={16} weight={700}>
+                  <Text align="start" size={16} weight={700}>
                     {data?.title}
                   </Text>
                   <Text color={palette.color_subText} size={10} weight={400}>
