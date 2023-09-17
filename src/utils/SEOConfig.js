@@ -1,4 +1,4 @@
-import logo from "@assets/logo.png";
+import logo from "@assets/seo.png";
 
 export const config = {
   description: "2023 CARDINAL : 응답하라 서강",
