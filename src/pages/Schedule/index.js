@@ -16,6 +16,7 @@ import ph1 from "@assets/ph1.svg";
 import yesterday from "@assets/yesterday.svg";
 import nextday from "@assets/nextday.svg";
 import { Space } from "@components/atoms/Space";
+import Footer from "@components/organisms/Footer";
 const Schedule = () => {
   const [toggleSwitch, setToggleSwitch] = useState("축제일정");
   const [EventSwitch, setEventSwitch] = useState("월");
@@ -267,13 +268,13 @@ const Schedule = () => {
             <Flex direction="row" justify="center">
               <ImageBox>
                 {" "}
-                <img src={bignaughty} />
+                <img src={bignaughty} alt="lineup" />
                 <Text size={12} color="white" weight={700}>
                   빅나티
                 </Text>
               </ImageBox>
               <ImageBox>
-                <img src={yena} />
+                <img src={yena} alt="lineup" />
                 <Text size={12} color="white" weight={700}>
                   최예나
                 </Text>
@@ -287,21 +288,21 @@ const Schedule = () => {
             </Date>
             <Flex direction="row" justify="center">
               <ImageSmall>
-                <img src={ph1} />
+                <img src={ph1} alt="lineup" />
 
                 <Text size={10} color="white" weight={700}>
                   PH-1
                 </Text>
               </ImageSmall>
               <ImageHor>
-                <img src={ydbband} />
+                <img src={ydbband} alt="lineup" />
                 <Text size={10} color="white" weight={700}>
                   유다빈 밴드
                 </Text>
               </ImageHor>
             </Flex>
             <ImageBig>
-              <img src={akmu} />
+              <img src={akmu} alt="lineup" />
               <Text size={20} color="white" weight={700}>
                 AKMU
               </Text>
@@ -309,6 +310,8 @@ const Schedule = () => {
           </ContentSection>
         </Flex>
       )}
+      <Footer />
+      <Space height={"90px"} />
     </Flex>
   );
 };
@@ -445,13 +448,8 @@ const EventRow = styled.div`
 `;
 
 const EventBox = styled.div`
-<<<<<<< HEAD
   border: 1px solid ${palette.color_beige};
   width: ${({ verySmallFont }) => (verySmallFont ? "110px" : "99px")};
-=======
-  border: ${palette.color_beige};
-  width: 99px;
->>>>>>> 500b98f6da7cf98d3bf75db467c1d62ef48146e3
   height: 24px;
   border-radius: 5px;
   margin: 3px 6px;

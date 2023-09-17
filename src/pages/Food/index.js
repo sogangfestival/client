@@ -5,6 +5,7 @@ import Flex from "@components/atoms/Flex";
 import { palette } from "@styles/palette";
 import { Text } from "@components/atoms/Text";
 import Footer from "@components/organisms/Footer";
+import { Space } from "@components/atoms/Space";
 const Food = () => {
   return (
     <Flex>
@@ -372,6 +373,7 @@ const Food = () => {
           </Flex>
         </ItemBox>
       </Flex>
+      <Space height={"90px"} />
     </Flex>
   );
 };

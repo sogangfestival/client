@@ -260,6 +260,7 @@ const Map = () => {
                 </ItemBox>
               ))}
             </Flex>
+            <Space height={"90px"} />
           </Flex>
         </>
       )}
@@ -348,11 +349,11 @@ const fadeUp = keyframes`
 
 const ToggleBtn = styled.div`
   width: 148px;
-  height: 23px;
+  height: 25px;
   border-radius: 10px;
   background-color: ${palette.color_wine};
   position: absolute;
-  top: 520px;
+  top: 517px;
 `;
 
 const ChoiceWrapper = styled.div`

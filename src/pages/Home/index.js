@@ -209,105 +209,110 @@ const Home = () => {
         <Space height={"120px"} />
         <HomeFooter>
           <Flex align="start">
-            <Text size={16} weight={700}>
-              제작자
+            <Text weight={700} size={16} color={palette.color_mainText}>
+              제작자들
             </Text>
-            <Space height={"15px"} />
-            <Flex direction="row" justify="space-between" align="start">
-              <Flex width="auto" gap={15} align="start" justify="start">
-                <Text size={12} weight={700} color={palette.color_subText}>
+            <Space height={"10px"} />
+            <Flex justify="start" direction="row" align="start" gap={20}>
+              <Flex width="130px" align="start">
+                <Text weight={700} size={10} color={palette.color_subText}>
                   멋쟁이사자처럼
                 </Text>
-                <Flex align="start" gap={3}>
-                  <Text size={12} weight={700} color={palette.color_subText}>
+              </Flex>
+              <Flex align="start" gap={3}>
+                <Flex direction="row" justify="start" gap={4}>
+                  <Text weight={700} size={10} color={palette.color_subText}>
                     프론트엔드
                   </Text>
-                  <Text size={12} weight={400} color={palette.color_subText}>
+                  <Text weight={400} size={10} color={palette.color_subText}>
                     진민석
                   </Text>
-                  <Text size={12} weight={400} color={palette.color_subText}>
+                  <Text weight={400} size={10} color={palette.color_subText}>
                     정고은
                   </Text>
-                  <Text size={12} weight={400} color={palette.color_subText}>
+                  <Text weight={400} size={10} color={palette.color_subText}>
                     한우석
                   </Text>
                 </Flex>
-              </Flex>
-              <Flex width="auto" gap={15} align="start" justify="start">
-                <Text size={12} weight={700} color={palette.color_subText}>
-                  총동아리연합학생회
-                </Text>
-                <Flex direction="row" justify="space-between">
-                  <Flex align="start" gap={3}>
-                    <Text size={12} weight={700} color={palette.color_subText}>
-                      총괄
-                    </Text>
-                    <Text size={12} weight={400} color={palette.color_subText}>
-                      범수빈
-                    </Text>
-                  </Flex>
-                  <Flex align="start" gap={3}>
-                    <Text size={12} weight={700} color={palette.color_subText}>
-                      디자인
-                    </Text>
-                    <Text size={12} weight={400} color={palette.color_subText}>
-                      하이은
-                    </Text>
-                  </Flex>
+                <Flex direction="row" justify="start" gap={4}>
+                  <Text weight={700} size={10} color={palette.color_subText}>
+                    백엔드
+                  </Text>
+                  <Text weight={400} size={10} color={palette.color_subText}>
+                    김성현
+                  </Text>
+                  <Text weight={400} size={10} color={palette.color_subText}>
+                    신선희
+                  </Text>
+                  <Text weight={400} size={10} color={palette.color_subText}>
+                    이건화
+                  </Text>
+                  <Text weight={400} size={10} color={palette.color_subText}>
+                    이우찬
+                  </Text>
                 </Flex>
-              </Flex>
-              <Flex width="auto" gap={15} align="start" justify="start">
-                <Text size={12} weight={700} color={palette.color_subText}>
-                  총학생회
-                </Text>
-                <Flex align="start" gap={3}>
-                  <Text size={12} weight={700} color={palette.color_subText}>
-                    디자인
+                <Flex direction="row" justify="start" gap={4}>
+                  <Text weight={400} size={10} color={palette.color_subText}>
+                    이종미
                   </Text>
-                  <Text size={12} weight={400} color={palette.color_subText}>
-                    박종현
+                  <Text weight={400} size={10} color={palette.color_subText}>
+                    임정연
                   </Text>
-                  <Text size={12} weight={400} color={palette.color_subText}>
-                    송인준
+                  <Text weight={400} size={10} color={palette.color_subText}>
+                    윤성호
                   </Text>
-                  <Text size={12} weight={400} color={palette.color_subText}>
-                    Eunice Gan
+                  <Text weight={400} size={10} color={palette.color_subText}>
+                    윤태호
                   </Text>
                 </Flex>
               </Flex>
             </Flex>
-            <Space height={"20px"} />
-            <Flex align="start" gap={3}>
-              <Text size={12} weight={700} color={palette.color_subText}>
-                백엔드
-              </Text>
-              <Flex justify="start" direction="row" gap={3}>
-                <Text size={12} weight={400} color={palette.color_subText}>
-                  김성현
-                </Text>
-                <Text size={12} weight={400} color={palette.color_subText}>
-                  신선희
-                </Text>
-                <Text size={12} weight={400} color={palette.color_subText}>
-                  이건화
-                </Text>
-                <Text size={12} weight={400} color={palette.color_subText}>
-                  이우찬
+            <Space height={"10px"} />
+            <Flex justify="start" direction="row" align="start" gap={20}>
+              <Flex width="130px" align="start">
+                <Text weight={700} size={10} color={palette.color_subText}>
+                  총동아리연합학생회
                 </Text>
               </Flex>
-              <Flex justify="start" direction="row" gap={3}>
-                <Text size={12} weight={400} color={palette.color_subText}>
-                  이종미
+              <Flex align="start" gap={3}>
+                <Flex direction="row" justify="start" gap={4}>
+                  <Text weight={700} size={10} color={palette.color_subText}>
+                    총괄
+                  </Text>
+                  <Text weight={400} size={10} color={palette.color_subText}>
+                    범수빈
+                  </Text>
+                  <Text weight={700} size={10} color={palette.color_subText}>
+                    디자인
+                  </Text>
+                  <Text weight={400} size={10} color={palette.color_subText}>
+                    하이은
+                  </Text>
+                </Flex>
+              </Flex>
+            </Flex>
+            <Space height={"10px"} />
+            <Flex justify="start" direction="row" align="start" gap={20}>
+              <Flex width="130px" align="start">
+                <Text weight={700} size={10} color={palette.color_subText}>
+                  총학생회
                 </Text>
-                <Text size={12} weight={400} color={palette.color_subText}>
-                  임정연
-                </Text>
-                <Text size={12} weight={400} color={palette.color_subText}>
-                  윤성호
-                </Text>
-                <Text size={12} weight={400} color={palette.color_subText}>
-                  윤태호
-                </Text>
+              </Flex>
+              <Flex align="start" gap={3}>
+                <Flex direction="row" justify="start" gap={4}>
+                  <Text weight={700} size={10} color={palette.color_subText}>
+                    디자인
+                  </Text>
+                  <Text weight={400} size={10} color={palette.color_subText}>
+                    박종현
+                  </Text>
+                  <Text weight={400} size={10} color={palette.color_subText}>
+                    송인준
+                  </Text>
+                  <Text weight={400} size={10} color={palette.color_subText}>
+                    Eunice Gan
+                  </Text>
+                </Flex>
               </Flex>
             </Flex>
           </Flex>
