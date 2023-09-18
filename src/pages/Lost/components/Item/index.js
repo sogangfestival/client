@@ -26,12 +26,7 @@ const Item = ({
     <StyledItem>
       <Flex direction="row" justify="start" gap={4}>
         <Link style={{ textDecoration: "none" }} to={`/lost/${id}`}>
-          <ItemImg
-            data={image1 ? image1 : sqaure}
-            type={"image/svg+xml"}
-            width={72}
-            height={72}
-          />
+          <ItemImg src={image1 ? image1 : sqaure} width={72} height={72} />
         </Link>
         <Flex gap={7} align="start" justify="start">
           <Flex gap={8}>
@@ -134,7 +129,7 @@ const TitleBox = styled.div`
   width: 156px;
 `;
 
-const ItemImg = styled.object`
+const ItemImg = styled.img`
   object-fit: contain;
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
