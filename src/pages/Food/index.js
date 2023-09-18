@@ -84,7 +84,7 @@ const Food = () => {
               <Flex width="100%" height="100%" direction="row" justify="start">
                 <Flex justify="space-between" direction="row">
                   <Text size={14} weight={400} color={palette.color_mainText}>
-                    <div>&nbsp;&nbsp;기본</div>
+                    <div>&nbsp;&nbsp;대</div>
                   </Text>
                   <Text size={14} weight={700} color={palette.color_mainText}>
                     23,0
