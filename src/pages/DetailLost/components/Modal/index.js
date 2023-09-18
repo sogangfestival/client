@@ -5,7 +5,7 @@ import { palette } from "@styles/palette";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import lock from "@assets/lock.svg";
+import lock from "@assets/lock.png";
 
 const Modal = ({ setPwd, requestPost }) => {
   const [password, setPassword] = useState("");
@@ -45,7 +45,11 @@ const Modal = ({ setPwd, requestPost }) => {
         {isPosted ? (
           <PasswordWrapper>
             <Flex>
-              <object data={lock} type="image/svg+xml" />
+              <img
+                src={lock}
+                alt="lock"
+                style={{ width: "134px", height: "100px" }}
+              />
               <Text size={14} weight={700}>
                 작성자 인증 비밀번호 설정 완료!
               </Text>
