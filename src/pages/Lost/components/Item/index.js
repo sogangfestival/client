@@ -2,7 +2,6 @@ import Flex from "@components/atoms/Flex";
 import { Text } from "@components/atoms/Text";
 import React from "react";
 import { styled } from "styled-components";
-import iphone from "@assets/iphone.jpg";
 import reply from "@assets/reply.svg";
 import { palette } from "@styles/palette";
 import Tag from "../Tag";

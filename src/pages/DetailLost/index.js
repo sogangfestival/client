@@ -7,7 +7,6 @@ import { palette } from "@styles/palette";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
-import iphone from "@assets/iphone.jpg";
 import Reply from "./components/Reply";
 import SearhImg from "@assets/search2.svg";
 import kakao from "@assets/kakao.svg";
