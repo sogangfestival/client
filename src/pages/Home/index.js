@@ -101,11 +101,13 @@ const Home = () => {
             />
           </div>
           <Space height={"10px"} />
+          <Flex align="start">
+            <Text align="start" size={24} weight={700}>
+              진행중인 이벤트
+            </Text>
+          </Flex>
           <EventContainer>
             <Flex justify="start" align="start">
-              <Text align="start" size={24} weight={700}>
-                진행중인 이벤트
-              </Text>
               <Space height={"13px"} />
               <>
                 <Flex wrap="noWrap" direction="row" justify="start" gap={12}>
