@@ -1,16 +1,17 @@
 import React from "react";
 import { styled } from "styled-components";
-import logo from "@assets/logo.svg";
+import logo from "@assets/logo.png";
 import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <Link to={"/"}>
       <StyledHeader>
-        <object
+        <img
           style={{ cursor: "pointer" }}
-          type="image/svg+xml"
-          data={logo}
+          src={logo}
+          width={"150px"}
+          height={"48px"}
         />
       </StyledHeader>
     </Link>

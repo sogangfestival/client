@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import MapIcon from "@assets/mapIcon.svg";
-import TruckIcon from "@assets/truckIcon.svg";
-import CalIcon from "@assets/calIcon.svg";
-import LostIcon from "@assets/lostIcon.svg";
+import MapIcon from "@assets/mapIcon.png";
+import TruckIcon from "@assets/truckIcon.png";
+import CalIcon from "@assets/calIcon.png";
+import LostIcon from "@assets/lostIcon.png";
 import Flex from "@components/atoms/Flex";
 import { Text } from "@components/atoms/Text";
 import { palette } from "@styles/palette";
 import { Link } from "react-router-dom";
-import HomeIcon from "@assets/homeIcon.svg";
+import HomeIcon from "@assets/homeIcon.png";
 
 const footerData = [
   {
@@ -49,7 +49,7 @@ const Footer = () => {
             >
               <Link to={el.path}>
                 <EachIcon name={el.name}>
-                  <object data={el.src} type="image/svg+xml" />
+                  <img src={el.src} style={{ cursor: "pointer" }} />
                 </EachIcon>
               </Link>
             </div>
