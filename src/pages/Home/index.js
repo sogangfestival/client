@@ -87,17 +87,17 @@ const Home = () => {
             }}
             style={{ position: "relative", width: "100%", cussor: "pointer" }}
           >
-            <MainCard src={mainCard1} />
-            <img
+            <MainCard type="image/svg+xml" data={mainCard1} />
+            <object
               style={{
                 cursor: "pointer",
                 position: "absolute",
                 zIndex: 2,
                 left: "8px",
-                top: "110px",
+                top: "120px",
               }}
-              alt="logo"
-              src={logoWhite}
+              type="image/svg+xml"
+              data={logoWhite}
             />
           </div>
           <Space height={"10px"} />
@@ -352,7 +352,7 @@ const EventContainer = styled.div`
   overflow-x: scroll;
 `;
 
-const MainCard = styled.img`
+const MainCard = styled.object`
   cursor: pointer;
   width: 312px;
   height: 312px;

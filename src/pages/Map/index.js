@@ -165,7 +165,7 @@ const Map = () => {
           </SelectionContainer>
           <Flex width="100%" height="400px" justify="center" align="center">
             <MapWrapper>
-              <img src={schoolmap} />
+              <object data={schoolmap} type="image/svg+xml" />
               <IndicatorContainer x={285} y={163}>
                 <img
                   src={indicator}
@@ -194,12 +194,12 @@ const Map = () => {
           <Flex>
             <Menu isOpen={isMenuOpen} ref={menuRef}>
               <Flex gap={10}>
-                <img src={PullBar} />
+                <object data={PullBar} type="image/svg+xml" />
                 <Text size={15} color={palette.color_mainText}>
                   건물 목록
                 </Text>
                 <Space height={15} />
-                <img src={BottomBar} />
+                <img data={BottomBar} type="image/svg+xml" />
                 <Flex
                   direction="row"
                   width="80%"
