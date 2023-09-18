@@ -46,6 +46,7 @@ const DetailLost = () => {
       });
       getPost();
       setParent("");
+      setComment("");
     } catch (err) {
       console.error(err);
     }
@@ -81,27 +82,39 @@ const DetailLost = () => {
     <div style={{ width: "100%", position: "relative" }}>
       <Helmet>
         <title>2023 CARDINAL : 분실물 페이지</title>
-        <meta name="keywords" content="분실물" />
-        <meta name="description" content={data?.content} />
-        <meta name="image" content={data?.image1 || logo} />
-        <meta property="og:site_name" content="2023 CARDINAL : 응답하라 서강" />
-        <meta
-          property="og:url"
-          content={`https://www.sgucardinal.com/lost/${id}`}
-        />
-        <link rel="canonical" href={`https://www.sgucardinal.com/lost/${id}`} />
         <meta
           property="og:title"
           content={data?.title || "2023 CARDINAL 분실물 페이지"}
+          data-rh="true"
         />
-        <meta property="og:image" content={logo} />
+        <meta property="og:image" content={logo} data-rh="true" />
         <meta
           property="og:description"
           content={data?.content || "2023 CARDINAL 분실물 페이지입니다"}
+          data-rh="true"
         />
-        <meta name="twitter:title" content={data?.title} />
-        <meta name="twitter:description" content={data?.content} />
-        <meta name="twitter:image" content={logo} />
+        <meta name="keywords" content="분실물" data-rh="true" />
+        <meta name="description" content={data?.content} data-rh="true" />
+        <meta name="image" content={data?.image1 || logo} data-rh="true" />
+        <meta
+          property="og:site_name"
+          content="2023 CARDINAL : 응답하라 서강"
+          data-rh="true"
+        />
+        <meta
+          property="og:url"
+          content={`https://www.sgucardinal.com/lost/${id}`}
+          data-rh="true"
+        />
+        <link rel="canonical" href={`https://www.sgucardinal.com/lost/${id}`} />
+
+        <meta name="twitter:title" content={data?.title} data-rh="true" />
+        <meta
+          name="twitter:description"
+          content={data?.content}
+          data-rh="true"
+        />
+        <meta name="twitter:image" content={logo} data-rh="true" />
       </Helmet>
       {isModal ? <Modal setPwd={setPwd} requestPost={requestPost} /> : ""}
       {data ? (
