@@ -89,6 +89,7 @@ const Map = () => {
           >
             <Text
               size={12}
+              cursor="pointer"
               color={
                 toggleSwitch === "학교"
                   ? palette.color_wine
@@ -106,6 +107,7 @@ const Map = () => {
           >
             <Text
               size={12}
+              cursor="pointer"
               color={
                 toggleSwitch === "이벤트"
                   ? palette.color_wine
