@@ -49,7 +49,10 @@ const Footer = () => {
             >
               <Link to={el.path}>
                 <EachIcon name={el.name}>
-                  <img src={el.src} style={{ cursor: "pointer" }} />
+                  <img
+                    src={el.src}
+                    style={{ cursor: "pointer", width: "28px", height: "28px" }}
+                  />
                 </EachIcon>
               </Link>
             </div>

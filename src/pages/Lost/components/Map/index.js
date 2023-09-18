@@ -1,7 +1,7 @@
 import { palette } from "@styles/palette";
 import React, { useState } from "react";
 import { css, keyframes, styled } from "styled-components";
-import map from "@assets/map.svg";
+import map from "@assets/map.png";
 import Flex from "@components/atoms/Flex";
 import { Space } from "@components/atoms/Space";
 import { mapData } from "@utils/data";
@@ -15,7 +15,7 @@ const Map = ({ click, onClick }) => {
     <MapContainer>
       <Flex>
         <MapWrapper>
-          <MapImg data={map} type="image/svg+xml" />
+          <MapImg src={map} alt="map" />
           {mapData.map((el) => (
             <IndicatorContainer
               isClicked={mapName?.split(" ")[0] === el.name}
@@ -122,7 +122,7 @@ const MapItem = styled.div`
   align-items: center;
 `;
 
-const MapImg = styled.object`
+const MapImg = styled.img`
   object-fit: cover;
   width: 100%;
 `;

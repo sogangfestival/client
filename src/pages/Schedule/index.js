@@ -8,11 +8,11 @@ import { useState } from "react";
 import { Text } from "@components/atoms/Text";
 import left from "@assets/leftToggle.svg";
 import right from "@assets/rightToggle.svg";
-import yena from "@assets/yena.svg";
-import bignaughty from "@assets/bignaughty.svg";
-import ydbband from "@assets/ydbband.svg";
+import yena from "@assets/yena.png";
+import bignaughty from "@assets/bignaughty.png";
+import ydbband from "@assets/ydbband.png";
 import akmu from "@assets/akmu.png";
-import ph1 from "@assets/ph1.svg";
+import ph1 from "@assets/ph1.png";
 import yesterday from "@assets/yesterday.svg";
 import nextday from "@assets/nextday.svg";
 import { Space } from "@components/atoms/Space";
@@ -281,14 +281,21 @@ const Schedule = () => {
             </Date>
             <Flex direction="row" justify="center">
               <ImageBox>
-                {" "}
-                <object type="image/svg+xml" data={bignaughty} alt="lineup" />
+                <img
+                  style={{ width: "116px", height: "129px" }}
+                  src={bignaughty}
+                  alt="lineup"
+                />
                 <Text size={12} color="white" weight={700}>
                   빅나티
                 </Text>
               </ImageBox>
               <ImageBox>
-                <object type="image/svg+xml" data={yena} alt="lineup" />
+                <img
+                  style={{ width: "116px", height: "129px" }}
+                  src={yena}
+                  alt="lineup"
+                />
                 <Text size={12} color="white" weight={700}>
                   최예나
                 </Text>
@@ -302,21 +309,33 @@ const Schedule = () => {
             </Date>
             <Flex direction="row" justify="center">
               <ImageSmall>
-                <object type="image/svg+xml" data={ph1} />
+                <img
+                  src={ph1}
+                  style={{ width: "83px", height: "83px" }}
+                  alt="ph1"
+                />
 
                 <Text size={10} color="white" weight={700}>
                   PH-1
                 </Text>
               </ImageSmall>
               <ImageHor>
-                <object data={ydbband} type="image/svg+xml" />
+                <img
+                  style={{ width: "131px", height: "83px" }}
+                  src={ydbband}
+                  alt="ydbband"
+                />
                 <Text size={10} color="white" weight={700}>
                   유다빈 밴드
                 </Text>
               </ImageHor>
             </Flex>
             <ImageBig>
-              <img src={akmu} alt="akmu" />
+              <img
+                src={akmu}
+                style={{ width: "151px", height: "164px" }}
+                alt="akmu"
+              />
               <Text size={20} color="white" weight={700}>
                 AKMU
               </Text>

@@ -7,7 +7,7 @@ import Line from "@assets/line.svg";
 import { palette } from "@styles/palette";
 import Arrow from "@assets/arrow.svg";
 import React, { useState, useRef, useEffect } from "react";
-import schoolmap from "@assets/map.svg";
+import schoolmap from "@assets/map.png";
 import ItemBox from "./component/ItemBox";
 import PullBar from "@assets/pullbar.png";
 import BottomBar from "@assets/bottombar.png";
@@ -165,7 +165,7 @@ const Map = () => {
           </SelectionContainer>
           <Flex width="100%" height="400px" justify="center" align="center">
             <MapWrapper>
-              <object data={schoolmap} type="image/svg+xml" />
+              <img src={schoolmap} alt="map" width={"332px"} height={"238px"} />
               <IndicatorContainer x={285} y={163}>
                 <img
                   src={indicator}
@@ -194,7 +194,7 @@ const Map = () => {
           <Flex>
             <Menu isOpen={isMenuOpen} ref={menuRef}>
               <Flex gap={10}>
-                <img src={PullBar} />
+                <img src={PullBar} style={{ cursor: "pointer" }} />
                 <Text size={15} color={palette.color_mainText}>
                   건물 목록
                 </Text>
