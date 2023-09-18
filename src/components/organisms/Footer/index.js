@@ -8,6 +8,7 @@ import Flex from "@components/atoms/Flex";
 import { Text } from "@components/atoms/Text";
 import { palette } from "@styles/palette";
 import { Link } from "react-router-dom";
+import HomeIcon from "@assets/homeIcon.svg";
 
 const footerData = [
   {
@@ -19,6 +20,11 @@ const footerData = [
     path: "/food",
     name: "푸드트럭",
     src: TruckIcon,
+  },
+  {
+    path: "/",
+    name: "HOME",
+    src: HomeIcon,
   },
   {
     path: "/schedule",
@@ -38,11 +44,15 @@ const Footer = () => {
       <Flex direction="row">
         {footerData.map((el) => (
           <Flex gap={5} key={el.name}>
-            <Link to={el.path}>
-              <EachIcon>
-                <img src={el.src} alt="icon" />
-              </EachIcon>
-            </Link>
+            <div
+              style={{ height: "51px", display: "flex", alignItems: "center" }}
+            >
+              <Link to={el.path}>
+                <EachIcon name={el.name}>
+                  <img src={el.src} alt="icon" />
+                </EachIcon>
+              </Link>
+            </div>
             <Text cursor="pointer" size={12} weight={500}>
               {el.name}
             </Text>
@@ -54,10 +64,17 @@ const Footer = () => {
 };
 
 const EachIcon = styled.div`
-  padding: 11px;
   cursor: pointer;
-  border-radius: 10px;
-  background-color: ${palette.color_wine};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: ${({ name }) => (name === "HOME" ? "50%" : "10px")};
+  width: ${({ name }) => (name === "HOME" ? "51px" : "41px")};
+  height: ${({ name }) => (name === "HOME" ? "51px" : "41px")};
+  background-color: ${({ name }) =>
+    name === "HOME" ? "white" : palette.color_wine};
+  box-shadow: ${({ name }) =>
+    name === "HOME" ? "0px 0px 4px 0px rgba(0, 0, 0, 0.25)" : "no"};
 `;
 
 const FooterWrapper = styled.div`
