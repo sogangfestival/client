@@ -19,7 +19,7 @@ const RouterComponent = () => {
         <Route path="/lost" element={<Lost />} />
         <Route path="/lost/add" element={<AddLost />} />
         <Route path="/lost/:id" element={<DetailLost />} />
-        <Route path="/*" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
