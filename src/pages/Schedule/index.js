@@ -252,7 +252,6 @@ const Schedule = () => {
                     {EventSwitch === day ? (
                       <EventRow>
                         {EventData[day].map((event, eventIndex) => {
-                          console.log(event.length >= 15);
                           return (
                             <EventBox
                               key={eventIndex}

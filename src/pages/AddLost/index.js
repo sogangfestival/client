@@ -68,7 +68,6 @@ const AddLost = () => {
       });
 
       if (toggleValue.location) {
-        console.log(toggleValue.location);
         formData.append("place", [toggleValue.location.split(" ")[1]]);
       }
       if (toggleValue.color) {
@@ -77,10 +76,7 @@ const AddLost = () => {
       if (toggleValue.product) {
         formData.append("type", [toggleValue.product.split(" ")[1]]);
       }
-      console.log(toggleValue.location, toggleValue.color, toggleValue.product);
       const data = await Service.uploadPost(formData);
-
-      console.log(data);
     } catch (err) {
       console.error(err);
     }
