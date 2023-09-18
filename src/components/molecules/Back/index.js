@@ -7,13 +7,11 @@ const Back = () => {
 
   return (
     <>
-      <img
+      <object
         onClick={() => navigate(-1)}
-        style={{ cursor: "pointer" }}
-        src={left}
-        width={"11px"}
-        height={"18px"}
-        alt="back"
+        style={{ cursor: "pointer", width: "11px", height: "18px" }}
+        data={left}
+        type="image/svg+xml"
       />
     </>
   );

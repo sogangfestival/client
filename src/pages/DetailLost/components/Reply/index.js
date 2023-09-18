@@ -43,13 +43,11 @@ const Reply = React.memo(
                   </Text>
                 </Flex>
 
-                <img
+                <object
                   onClick={() => reReplyOnComment()}
-                  style={{ cursor: "pointer" }}
-                  src={reply}
-                  alt="reply"
-                  width={"11px"}
-                  height={"10px"}
+                  style={{ cursor: "pointer", width: "11px", height: "10px" }}
+                  data={reply}
+                  type="image/svg+xml"
                 />
               </Flex>
               <Text align="start" size={11} weight={400}>
@@ -85,7 +83,11 @@ const ReReply = React.memo(
     return (
       <ReReplContainer>
         <Flex direction="row" gap={7} justify="start">
-          <img src={replSign} alt="repl" width={"13px"} height={"13px"} />
+          <object
+            daata={replSign}
+            type="image/svg+xml"
+            style={{ width: "13px", height: "13px" }}
+          />
           <Flex gap={4} align="start">
             <Flex direction="row" justify="start" gap={10}>
               <Text

@@ -45,7 +45,7 @@ const Modal = ({ setPwd, requestPost }) => {
         {isPosted ? (
           <PasswordWrapper>
             <Flex>
-              <img src={lock} alt="lock" />
+              <object data={lock} type="image/svg+xml" />
               <Text size={14} weight={700}>
                 작성자 인증 비밀번호 설정 완료!
               </Text>

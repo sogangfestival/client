@@ -194,12 +194,12 @@ const Map = () => {
           <Flex>
             <Menu isOpen={isMenuOpen} ref={menuRef}>
               <Flex gap={10}>
-                <object data={PullBar} type="image/svg+xml" />
+                <img src={PullBar} />
                 <Text size={15} color={palette.color_mainText}>
                   건물 목록
                 </Text>
                 <Space height={15} />
-                <img data={BottomBar} type="image/svg+xml" />
+                <img data={BottomBar} />
                 <Flex
                   direction="row"
                   width="80%"
@@ -234,7 +234,7 @@ const Map = () => {
         <>
           <Flex>
             <img src={Blue1} />
-            <img src={Blue2} />
+            <object data={Blue2} type="image/svg+xml" />
             <Flex direction="column" gap={15}>
               <Flex height="50px">
                 <Text color={palette.color_mainText} size={25}>

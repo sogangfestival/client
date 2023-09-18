@@ -41,7 +41,11 @@ const MainModal = ({ closeModal, curModal }) => {
               src={close}
               alt="close"
             />
-            <img src={mainDesc} alt="close" width={"340px"} height={"340px"} />
+            <object
+              data={mainDesc}
+              type="image/svg+xml"
+              style={{ width: "340px", height: "340px" }}
+            />
           </Flex>
         ) : (
           <Flex gap={12} align="end">

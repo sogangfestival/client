@@ -8,7 +8,7 @@ import { palette } from "@styles/palette";
 import Tag from "../Tag";
 import { Link } from "react-router-dom";
 import { calculateTime, converter } from "@utils/lib.js";
-import sqaure from "@assets/logo_square.png";
+import sqaure from "@assets/seo_svg.svg";
 
 const Item = ({
   id,
@@ -26,7 +26,12 @@ const Item = ({
     <StyledItem>
       <Flex direction="row" justify="start" gap={4}>
         <Link style={{ textDecoration: "none" }} to={`/lost/${id}`}>
-          <ItemImg src={image1 ? image1 : sqaure} width={72} height={72} />
+          <ItemImg
+            data={image1 ? image1 : sqaure}
+            type={"image/svg+xml"}
+            width={72}
+            height={72}
+          />
         </Link>
         <Flex gap={7} align="start" justify="start">
           <Flex gap={8}>
@@ -52,7 +57,11 @@ const Item = ({
                 </TimeBox>
               </Flex>
               <Flex direction="row" gap={6} width="auto">
-                <img width={11} height={11} src={reply} alt="reply" />
+                <object
+                  style={{ width: "11px", height: "11px" }}
+                  data={reply}
+                  type="image/svg+xml"
+                />
                 <Text size={10} color={palette.color_wine} weight={400}>
                   {comment_count}
                 </Text>
@@ -125,7 +134,7 @@ const TitleBox = styled.div`
   width: 156px;
 `;
 
-const ItemImg = styled.img`
+const ItemImg = styled.object`
   object-fit: contain;
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;

@@ -118,9 +118,9 @@ const Schedule = () => {
               CONTENTS: TIME TABLE
             </Text>
           </TitleSection>
-          <img
-            src={timeline}
-            alt="timeline"
+          <object
+            data={timeline}
+            type="image/svg+xml"
             style={{ objectFit: "cover" }}
             width={"100%"}
           />
@@ -287,13 +287,13 @@ const Schedule = () => {
             <Flex direction="row" justify="center">
               <ImageBox>
                 {" "}
-                <img src={bignaughty} alt="lineup" />
+                <object type="image/svg+xml" data={bignaughty} alt="lineup" />
                 <Text size={12} color="white" weight={700}>
                   빅나티
                 </Text>
               </ImageBox>
               <ImageBox>
-                <img src={yena} alt="lineup" />
+                <object type="image/svg+xml" data={yena} alt="lineup" />
                 <Text size={12} color="white" weight={700}>
                   최예나
                 </Text>
@@ -307,21 +307,21 @@ const Schedule = () => {
             </Date>
             <Flex direction="row" justify="center">
               <ImageSmall>
-                <img src={ph1} alt="lineup" />
+                <object type="image/svg+xml" data={ph1} />
 
                 <Text size={10} color="white" weight={700}>
                   PH-1
                 </Text>
               </ImageSmall>
               <ImageHor>
-                <img src={ydbband} alt="lineup" />
+                <object data={ydbband} type="image/svg+xml" />
                 <Text size={10} color="white" weight={700}>
                   유다빈 밴드
                 </Text>
               </ImageHor>
             </Flex>
             <ImageBig>
-              <img src={akmu} alt="lineup" />
+              <ojbect data={akmu} type="image/svg+xml" />
               <Text size={20} color="white" weight={700}>
                 AKMU
               </Text>

@@ -191,7 +191,7 @@ const Home = () => {
                         </Text>
                       </Link>
                       <Flex width="auto" direction="row" justify="start">
-                        <img src={people} alt="people" />
+                        <object data={people} type="image/svg+xml" />
                         <Text
                           size={13}
                           color={palette.color_subText}

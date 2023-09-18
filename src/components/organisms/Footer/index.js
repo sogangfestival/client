@@ -49,7 +49,7 @@ const Footer = () => {
             >
               <Link to={el.path}>
                 <EachIcon name={el.name}>
-                  <img src={el.src} alt="icon" />
+                  <object data={el.src} type="image/svg+xml" />
                 </EachIcon>
               </Link>
             </div>

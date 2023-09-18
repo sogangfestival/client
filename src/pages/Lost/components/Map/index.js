@@ -15,7 +15,7 @@ const Map = ({ click, onClick }) => {
     <MapContainer>
       <Flex>
         <MapWrapper>
-          <MapImg src={map} alt="map" />
+          <MapImg data={map} type="image/svg+xml" />
           {mapData.map((el) => (
             <IndicatorContainer
               isClicked={mapName?.split(" ")[0] === el.name}
@@ -122,7 +122,7 @@ const MapItem = styled.div`
   align-items: center;
 `;
 
-const MapImg = styled.img`
+const MapImg = styled.object`
   object-fit: cover;
   width: 100%;
 `;

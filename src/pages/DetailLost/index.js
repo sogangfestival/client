@@ -260,20 +260,21 @@ const DetailLost = () => {
           ></div>
           <FooterContainer>
             <Flex justify="end" gap={12} direction="row">
-              <img
-                style={{ borderRadius: "50%" }}
-                src={kakao}
-                alt="kakao"
-                width={"27px"}
-                height={"27px"}
+              <object
+                style={{ borderRadius: "50%", width: "27px", height: "27px" }}
+                data={kakao}
+                type="image/svg+xml"
               />
-              <img
+              <object
                 onClick={() => copyLink()}
-                style={{ borderRadius: "50%", cursor: "pointer" }}
-                src={copy}
-                alt="copy"
-                width={"24px"}
-                height={"24px"}
+                style={{
+                  borderRadius: "50%",
+                  cursor: "pointer",
+                  width: "24px",
+                  height: "24px",
+                }}
+                data={copy}
+                type="image/svg+xml"
               />
             </Flex>
           </FooterContainer>

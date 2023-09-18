@@ -7,7 +7,11 @@ const Header = () => {
   return (
     <Link to={"/"}>
       <StyledHeader>
-        <img style={{ cursor: "pointer" }} alt="logo" src={logo} />
+        <object
+          style={{ cursor: "pointer" }}
+          type="image/svg+xml"
+          data={logo}
+        />
       </StyledHeader>
     </Link>
   );

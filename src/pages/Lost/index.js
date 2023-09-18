@@ -206,9 +206,9 @@ const Lost = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <img
-                src={SearchImg}
-                alt="search"
+              <object
+                data={SearchImg}
+                type="image/svg+xml"
                 style={{ cursor: "pointer" }}
                 onClick={() => {
                   getLostData(true);
