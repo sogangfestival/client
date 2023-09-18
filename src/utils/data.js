@@ -106,7 +106,7 @@ export const mapData = [
     },
   },
   {
-    name: "로욜라 도서관",
+    name: "로욜라도서관",
     id: "loyola",
     coord: {
       x: 183,
@@ -114,7 +114,7 @@ export const mapData = [
     },
   },
   {
-    name: "곤자가 플라자",
+    name: "곤자가플라자",
     id: "plaza",
     coord: {
       x: 233,
