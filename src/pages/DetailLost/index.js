@@ -11,7 +11,7 @@ import iphone from "@assets/iphone.jpg";
 import Reply from "./components/Reply";
 import SearhImg from "@assets/search2.svg";
 import kakao from "@assets/kakao.svg";
-import copy from "@assets/copy.svg";
+import copy from "@assets/copyIcon.png";
 import Service from "services/sgFestival";
 import { calculateTime, converter } from "@utils/lib";
 import logo from "@assets/seo.png";
@@ -265,7 +265,7 @@ const DetailLost = () => {
                 data={kakao}
                 type="image/svg+xml"
               />
-              <object
+              <img
                 onClick={() => copyLink()}
                 style={{
                   borderRadius: "50%",
@@ -273,8 +273,8 @@ const DetailLost = () => {
                   width: "24px",
                   height: "24px",
                 }}
-                data={copy}
-                type="image/svg+xml"
+                alt="copy"
+                src={copy}
               />
             </Flex>
           </FooterContainer>
