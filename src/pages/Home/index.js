@@ -6,13 +6,13 @@ import Header from "@components/organisms/Header";
 import { palette } from "@styles/palette";
 import React, { useState } from "react";
 import styled from "styled-components";
-import logoWhite from "@assets/logo_white.svg";
+import logoWhite from "@assets/logo_white.png";
 import mainCard1 from "@assets/mainCard_1.png";
 import Footer from "@components/organisms/Footer";
-import event1 from "@assets/event1.svg";
-import event2 from "@assets/event2.svg";
-import event3 from "@assets/event3.svg";
-import event4 from "@assets/event4.svg";
+import event1 from "@assets/event1.png";
+import event2 from "@assets/event2.png";
+import event3 from "@assets/event3.png";
+import event4 from "@assets/event4.png";
 import logo from "@assets/logo.svg";
 import MainModal from "./components/MainModal";
 import { useTheme } from "@components/templates/ThemeProvider";
@@ -88,16 +88,18 @@ const Home = () => {
             style={{ position: "relative", width: "100%", cussor: "pointer" }}
           >
             <MainCard alt="main" src={mainCard1} />
-            <object
+            <img
               style={{
                 cursor: "pointer",
                 position: "absolute",
                 zIndex: 2,
                 left: "8px",
-                top: "120px",
+                top: "125px",
+                width: "291px",
+                height: "52px",
               }}
-              type="image/svg+xml"
-              data={logoWhite}
+              alt="logo_white"
+              src={logoWhite}
             />
           </div>
           <Space height={"10px"} />
@@ -141,6 +143,7 @@ const Home = () => {
                             align="start"
                             size={13}
                             weight={700}
+                            cursor="pointer"
                             color={palette.color_mainText}
                           >
                             {el.title}

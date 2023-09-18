@@ -2,7 +2,7 @@ import Flex from "@components/atoms/Flex";
 import React from "react";
 import styled from "styled-components";
 import close from "@assets/close.svg";
-import mainDesc from "@assets/cardinal_desc.svg";
+import mainDesc from "@assets/cardinal_desc.png";
 import { Text } from "@components/atoms/Text";
 import { palette } from "@styles/palette";
 
@@ -41,9 +41,9 @@ const MainModal = ({ closeModal, curModal }) => {
               src={close}
               alt="close"
             />
-            <object
-              data={mainDesc}
-              type="image/svg+xml"
+            <img
+              src={mainDesc}
+              alt="cardinal_desc"
               style={{ width: "340px", height: "340px" }}
             />
           </Flex>
