@@ -1,5 +1,5 @@
 import React from "react";
-import left from "@assets/leftPage.svg";
+import left from "@assets/leftPage.png";
 import { useNavigate } from "react-router-dom";
 
 const Back = () => {
@@ -7,11 +7,10 @@ const Back = () => {
 
   return (
     <>
-      <object
+      <img
         onClick={() => navigate(-1)}
         style={{ cursor: "pointer", width: "11px", height: "18px" }}
-        data={left}
-        type="image/svg+xml"
+        src={left}
       />
     </>
   );
