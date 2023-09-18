@@ -8,7 +8,7 @@ import { palette } from "@styles/palette";
 import Tag from "../Tag";
 import { Link } from "react-router-dom";
 import { calculateTime, converter } from "@utils/lib.js";
-import sqaure from "@assets/seo_svg.svg";
+import sqaure from "@assets/logo_square.png";
 
 const Item = ({
   id,
@@ -24,7 +24,7 @@ const Item = ({
 }) => {
   return (
     <StyledItem>
-      <Flex direction="row" justify="start" gap={4}>
+      <Flex direction="row" justify="start" gap={10}>
         <Link style={{ textDecoration: "none" }} to={`/lost/${id}`}>
           <ItemImg src={image1 ? image1 : sqaure} width={72} height={72} />
         </Link>
@@ -139,7 +139,7 @@ const ItemImg = styled.img`
 const StyledItem = styled.div`
   width: 100%;
   height: 100px;
-  padding: 15px 18px 13px 18px;
+  padding: 15px 18px 13px 13px;
   border-bottom: solid 1px #c1c1c1;
 `;
 

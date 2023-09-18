@@ -14,7 +14,7 @@ import BottomBar from "@assets/bottombar.png";
 import { mapData } from "@utils/maindata";
 import indicator from "@assets/indicator.svg";
 import Blue1 from "@assets/Blue1.png";
-import Blue2 from "@assets/Blue2.svg";
+import Blue2 from "@assets/Blue2.png";
 import { blueData } from "@utils/maindata";
 import axios from "axios";
 import Footer from "@components/organisms/Footer";
@@ -233,8 +233,8 @@ const Map = () => {
       ) : (
         <>
           <Flex>
-            <img src={Blue1} />
-            <object data={Blue2} type="image/svg+xml" />
+            <img src={Blue1} style={{ width: "100%", objectFit: "cover" }} />
+            <img src={Blue2} style={{ width: "100%", objectFit: "cover" }} />
             <Flex direction="column" gap={15}>
               <Flex height="50px">
                 <Text color={palette.color_mainText} size={25}>
@@ -364,7 +364,7 @@ const ToggleBtn = styled.div`
   border-radius: 10px;
   background-color: ${palette.color_wine};
   position: absolute;
-  top: 517px;
+  top: 512px;
 `;
 
 const ChoiceWrapper = styled.div`
