@@ -7,7 +7,7 @@ import { palette } from "@styles/palette";
 import React, { useState } from "react";
 import styled from "styled-components";
 import logoWhite from "@assets/logo_white.svg";
-import mainCard1 from "@assets/mainCard_1.svg";
+import mainCard1 from "@assets/mainCard_1.png";
 import Footer from "@components/organisms/Footer";
 import event1 from "@assets/event1.svg";
 import event2 from "@assets/event2.svg";
@@ -87,7 +87,7 @@ const Home = () => {
             }}
             style={{ position: "relative", width: "100%", cussor: "pointer" }}
           >
-            <MainCard type="image/svg+xml" data={mainCard1} />
+            <MainCard alt="main" src={mainCard1} />
             <object
               style={{
                 cursor: "pointer",
@@ -352,7 +352,7 @@ const EventContainer = styled.div`
   overflow-x: scroll;
 `;
 
-const MainCard = styled.object`
+const MainCard = styled.img`
   cursor: pointer;
   width: 312px;
   height: 312px;

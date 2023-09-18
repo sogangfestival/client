@@ -11,13 +11,13 @@ import right from "@assets/rightToggle.svg";
 import yena from "@assets/yena.svg";
 import bignaughty from "@assets/bignaughty.svg";
 import ydbband from "@assets/ydbband.svg";
-import akmu from "@assets/akmu.svg";
+import akmu from "@assets/akmu.png";
 import ph1 from "@assets/ph1.svg";
 import yesterday from "@assets/yesterday.svg";
 import nextday from "@assets/nextday.svg";
 import { Space } from "@components/atoms/Space";
 import Footer from "@components/organisms/Footer";
-import timeline from "@assets/timeline.svg";
+import timeline from "@assets/timeLine.png";
 
 const Schedule = () => {
   const [toggleSwitch, setToggleSwitch] = useState("축제일정");
@@ -118,12 +118,7 @@ const Schedule = () => {
               CONTENTS: TIME TABLE
             </Text>
           </TitleSection>
-          <object
-            data={timeline}
-            type="image/svg+xml"
-            style={{ objectFit: "cover" }}
-            width={"100%"}
-          />
+          <img src={timeline} style={{ objectFit: "cover" }} width={"100%"} />
           <Divider />
           <AlwaysEvent>
             <TitleSection>
@@ -321,7 +316,7 @@ const Schedule = () => {
               </ImageHor>
             </Flex>
             <ImageBig>
-              <ojbect data={akmu} type="image/svg+xml" />
+              <img src={akmu} alt="akmu" />
               <Text size={20} color="white" weight={700}>
                 AKMU
               </Text>
