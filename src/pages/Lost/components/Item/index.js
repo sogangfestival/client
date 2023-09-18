@@ -15,7 +15,7 @@ const Item = ({
   place = [],
   type = [],
   color = [],
-  replyCount = 0,
+  comment_count = 0,
   created_at,
   title,
   image1,
@@ -54,7 +54,7 @@ const Item = ({
               <Flex direction="row" gap={6} width="auto">
                 <img width={11} height={11} src={reply} alt="reply" />
                 <Text size={10} color={palette.color_wine} weight={400}>
-                  {replyCount}
+                  {comment_count}
                 </Text>
               </Flex>
             </Flex>
