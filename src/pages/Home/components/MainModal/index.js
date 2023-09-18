@@ -44,7 +44,7 @@ const MainModal = ({ closeModal, curModal }) => {
             <img
               src={mainDesc}
               alt="cardinal_desc"
-              style={{ width: "340px", height: "340px" }}
+              style={{ width: "330px", height: "330px" }}
             />
           </Flex>
         ) : (
