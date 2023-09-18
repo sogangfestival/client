@@ -17,6 +17,8 @@ import yesterday from "@assets/yesterday.svg";
 import nextday from "@assets/nextday.svg";
 import { Space } from "@components/atoms/Space";
 import Footer from "@components/organisms/Footer";
+import timeline from "@assets/timeline.svg";
+
 const Schedule = () => {
   const [toggleSwitch, setToggleSwitch] = useState("축제일정");
   const [EventSwitch, setEventSwitch] = useState("월");
@@ -39,9 +41,22 @@ const Schedule = () => {
       "노고체전 축구 4강",
       "노고체전 농구 결승",
       "노고체전 짱피구",
+      "한강 말고 서강",
     ],
-    목: ["부루마불", "동아리 공연", "아티스트 본판"],
-    금: ["부루바불", "학회소모임 및 밴드공연", "아티스트 본판"],
+    목: [
+      "부루마불",
+      "동아리 공연",
+      "아티스트 본판",
+      "서강문방구",
+      "한강 말고 서강",
+    ],
+    금: [
+      "부루마불",
+      "학회소모임 및 밴드공연",
+      "아티스트 본판",
+      "서강문방구",
+      "한강 말고 서강",
+    ],
   };
 
   return (
@@ -103,7 +118,12 @@ const Schedule = () => {
               CONTENTS: TIME TABLE
             </Text>
           </TitleSection>
-          <TableSection></TableSection>
+          <img
+            src={timeline}
+            alt="timeline"
+            style={{ objectFit: "cover" }}
+            width={"100%"}
+          />
           <Divider />
           <AlwaysEvent>
             <TitleSection>
@@ -345,7 +365,7 @@ const ChoiceWrapper = styled.div`
 const Divider = styled.div`
   width: 228px;
   height: 2px;
-  margin-top: 34px;
+  margin-top: 24px;
   background-color: #626262;
 `;
 const TitleSection = styled.div`

@@ -26,6 +26,7 @@ export default ItemBox;
 
 const Box = styled.div`
   display: flex;
+  padding-left: 10px;
   height: ${({ height }) => height};
   width: ${({ width }) => width};
   flex-direction: ${({ direction }) => direction};

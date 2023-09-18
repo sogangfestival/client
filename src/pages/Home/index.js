@@ -100,6 +100,7 @@ const Home = () => {
               src={logoWhite}
             />
           </div>
+          <Space height={"10px"} />
           <EventContainer>
             <Flex justify="start" align="start">
               <Text align="start" size={24} weight={700}>

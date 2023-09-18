@@ -119,6 +119,7 @@ const Lost = () => {
   };
   const switchTab = (id) => {
     setIsClicked(id);
+    setPage(1);
     setSearch("");
   };
 

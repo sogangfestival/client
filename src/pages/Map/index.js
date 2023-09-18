@@ -242,21 +242,30 @@ const Map = () => {
               {[...data].splice(0, data.length).map((el, idx) => (
                 <ItemBox
                   height="65px"
-                  width="80%"
+                  width="100%"
                   background={palette.color_wine}
-                  justify="space-around"
+                  justify="start"
                   direction="row"
                   align="center"
                 >
-                  <Text size={18.75} color={palette.color_beige}>
-                    {el.building_name}
-                  </Text>
-                  <Text size={18.75} color={palette.color_beige}>
-                    {el.team}
-                  </Text>
-                  <Text size={18.75} color={palette.color_beige}>
-                    {el.price}
-                  </Text>
+                  <Flex width="105px" justify="center" direction="row">
+                    <Text
+                      size={el.building_name.length >= 6 ? 16 : 18.75}
+                      color={palette.color_beige}
+                    >
+                      {el.building_name}
+                    </Text>
+                  </Flex>
+                  <Flex width="150px" justify="center" direction="row">
+                    <Text size={18.75} color={palette.color_beige}>
+                      {el.team}
+                    </Text>
+                  </Flex>
+                  <Flex width="105px">
+                    <Text size={18.75} color={palette.color_beige}>
+                      {el.price}
+                    </Text>
+                  </Flex>
                 </ItemBox>
               ))}
             </Flex>
