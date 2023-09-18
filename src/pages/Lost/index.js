@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 import { palette } from "@styles/palette";
 import { useEffect, useState } from "react";
 import { Space } from "@components/atoms/Space";
-import SearchImg from "@assets/search.svg";
+import SearchImg from "@assets/searchImg.png";
 import Item from "./components/Item";
 import left from "@assets/leftPage.svg";
 import right from "@assets/rightPage.svg";
@@ -206,10 +206,9 @@ const Lost = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <object
-                data={SearchImg}
-                type="image/svg+xml"
-                style={{ cursor: "pointer" }}
+              <img
+                src={SearchImg}
+                style={{ cursor: "pointer", width: "19px", height: "19px" }}
                 onClick={() => {
                   getLostData(true);
                   setPage(1);
