@@ -68,7 +68,7 @@ export const mapData = [
     name: "#GN관",
     coord: {
       x: 199,
-      y: 1221,
+      y: 121,
     },
   },
   {

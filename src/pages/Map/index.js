@@ -43,6 +43,7 @@ const Map = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [buttonClicked, setButtonClicked] = useState({});
   const [selectedButtons, setSelectedButtons] = useState([]);
+  console.log(selectedButtons);
   const [toggleSwitch, setToggleSwitch] = useState("학교");
   const menuRef = useRef(null);
 
